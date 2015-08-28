@@ -3,17 +3,39 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Mk Zang</title>
+  <title>Java, 基础（面试题）总结（分享-交流） | Mk Zang</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Mk Zang&apos; blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Mk Zang">
-<meta property="og:url" content="https://zyq001.github.io/index.html">
+  <meta name="description" content="Finally，final，finalize
+
+
+Finally：
+释放资源（内存之外的，打开的文件、连接、屏幕上的图形，，）
+①总会执行②非后台线程结束，后台线程被强关，不会执行finally
+③当try和catch中有return时，finally在return之后执行，但是返回值不会改变（finally中不会改变已保存的返回结果）
+④finally中最好不要包含return，否则程序会从fi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java, 基础（面试题）总结（分享-交流）">
+<meta property="og:url" content="https://zyq001.github.io/2015/08/29/Java-基础（面试题）总结（分享-交流）/index.html">
 <meta property="og:site_name" content="Mk Zang">
-<meta property="og:description" content="Mk Zang&apos; blog">
+<meta property="og:description" content="Finally，final，finalize
+
+
+Finally：
+释放资源（内存之外的，打开的文件、连接、屏幕上的图形，，）
+①总会执行②非后台线程结束，后台线程被强关，不会执行finally
+③当try和catch中有return时，finally在return之后执行，但是返回值不会改变（finally中不会改变已保存的返回结果）
+④finally中最好不要包含return，否则程序会从fi">
+<meta property="og:updated_time" content="2015-08-28T18:18:11.661Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mk Zang">
-<meta name="twitter:description" content="Mk Zang&apos; blog">
+<meta name="twitter:title" content="Java, 基础（面试题）总结（分享-交流）">
+<meta name="twitter:description" content="Finally，final，finalize
+
+
+Finally：
+释放资源（内存之外的，打开的文件、连接、屏幕上的图形，，）
+①总会执行②非后台线程结束，后台线程被强关，不会执行finally
+③当try和catch中有return时，finally在return之后执行，但是返回值不会改变（finally中不会改变已保存的返回结果）
+④finally中最好不要包含return，否则程序会从fi">
   
   
     <link rel="icon" href="favicon.png">
@@ -118,8 +140,7 @@
 </aside>
 
       
-      <section id="main">
-      <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+      <section id="main"><article id="post-Java-基础（面试题）总结（分享-交流）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -127,62 +148,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/29/hello-world/">Hello World</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          
-  <div class="article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2015/08/29/hello-world/">
-      <time datetime="2015-08-28T18:21:11.870Z" itemprop="datePublished">2015-08-29</time>
-    </a>
-  </div>
-
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-                
-        <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://zyq001.github.io/2015/08/29/hello-world/" data-id="cidvz3a3y00053ootd00lpkav" class="article-share-link">分享到</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-    
-      <article id="post-Java-基础（面试题）总结（分享-交流）" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/29/Java-基础（面试题）总结（分享-交流）/">Java, 基础（面试题）总结（分享-交流）</a>
+    <h1 class="article-title" itemprop="name">
+      Java, 基础（面试题）总结（分享-交流）
     </h1>
   
 
@@ -372,11 +339,27 @@ public</span><span class="keyword"> static</span> Singleton<span class="function
     </footer>
   </div>
   
+    
+<nav id="article-nav">
+  
+    <a href="/2015/08/29/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          Hello World
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+
+  
 </article>
 
 
-
-    </section>
+</section>
       
         <aside id="sidebar">
   
