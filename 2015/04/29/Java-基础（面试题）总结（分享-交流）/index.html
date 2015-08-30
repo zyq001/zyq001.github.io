@@ -15,7 +15,7 @@ Finally：
 ④finally中最好不要包含return，否则程序会从fi">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java, 基础（面试题）总结（分享-交流）">
-<meta property="og:url" content="https://zyq001.github.io/2015/08/29/Java-基础（面试题）总结（分享-交流）/index.html">
+<meta property="og:url" content="https://zyq001.github.io/2015/04/29/Java-基础（面试题）总结（分享-交流）/index.html">
 <meta property="og:site_name" content="Mk Zang">
 <meta property="og:description" content="Finally，final，finalize
 
@@ -25,7 +25,7 @@ Finally：
 ①总会执行②非后台线程结束，后台线程被强关，不会执行finally
 ③当try和catch中有return时，finally在return之后执行，但是返回值不会改变（finally中不会改变已保存的返回结果）
 ④finally中最好不要包含return，否则程序会从fi">
-<meta property="og:updated_time" content="2015-08-28T18:18:11.661Z">
+<meta property="og:updated_time" content="2015-08-30T18:14:46.807Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java, 基础（面试题）总结（分享-交流）">
 <meta name="twitter:description" content="Finally，final，finalize
@@ -56,15 +56,15 @@ Finally：
       <a href="/" id="logo"><i class="logo" style="background-image: url(/css/images/logo.png)"></i><span class="site-title">Mk Zang</span></a>
       <nav id="main-nav">
         
-          <a class="main-nav-link" href="/.">Home</a>
+          <a class="main-nav-link" href="/.">主页</a>
         
-          <a class="main-nav-link" href="/archives">Archives</a>
+          <a class="main-nav-link" href="/archives">归档</a>
         
-          <a class="main-nav-link" href="/categories">Categories</a>
+          <a class="main-nav-link" href="/categories">分类</a>
         
-          <a class="main-nav-link" href="/tags">Tags</a>
+          <a class="main-nav-link" href="/tags">标签</a>
         
-          <a class="main-nav-link" href="/about">About</a>
+          <a class="main-nav-link" href="/about">关于</a>
         
       </nav>
       
@@ -83,15 +83,15 @@ Finally：
     <table class="menu outer">
       <tr>
         
-          <td><a class="main-nav-link" href="/.">Home</a></td>
+          <td><a class="main-nav-link" href="/.">主页</a></td>
         
-          <td><a class="main-nav-link" href="/archives">Archives</a></td>
+          <td><a class="main-nav-link" href="/archives">归档</a></td>
         
-          <td><a class="main-nav-link" href="/categories">Categories</a></td>
+          <td><a class="main-nav-link" href="/categories">分类</a></td>
         
-          <td><a class="main-nav-link" href="/tags">Tags</a></td>
+          <td><a class="main-nav-link" href="/tags">标签</a></td>
         
-          <td><a class="main-nav-link" href="/about">About</a></td>
+          <td><a class="main-nav-link" href="/about">关于</a></td>
         
         <td>
           <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="hidden" name="sitesearch" value="https://zyq001.github.io"></form>
@@ -109,12 +109,12 @@ Finally：
       <img id="avatar" src="/css/images/avatar.png">
       <h2 id="name">Mk Zang</h2>
       <h3 id="title">Byr@Java.BigData</h3>
-      <span id="location"><i class="fa fa-map-marker"></i>Harbin, China</span>
-      <a id="follow" href="https://github.com/zyq001/">关注我</a>
+      <span id="location"><i class="fa fa-map-marker"></i>Beijing, China</span>
+      <a id="follow" href="https://github.com/zyq001/">+关注</a>
     </div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        2
+        1
         <span>文章</span>
       </div>
       <div class="article-info-block">
@@ -157,13 +157,18 @@ Finally：
           
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2015/08/29/Java-基础（面试题）总结（分享-交流）/">
-      <time datetime="2015-08-28T18:02:42.000Z" itemprop="datePublished">2015-08-29</time>
+    <a href="/2015/04/29/Java-基础（面试题）总结（分享-交流）/">
+      <time datetime="2015-04-28T18:02:42.000Z" itemprop="datePublished">2015-04-29</time>
     </a>
   </div>
 
 
           
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/Java/">Java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Java/面试/">面试</a>
+  </div>
+
         </div>
       </header>
     
@@ -186,7 +191,8 @@ Finally：
 </ul>
 <p>基本数据类型：不可更改<br>类：不可继承<br>对象：引用不可变，对象内容可变</p>
 <pre><code>finalze：回收前调用，不适合用来清理或释放资源。对象免死最后机会！保证会被调用，但不保证会执行完<span class="params">(在低优先级线程中执行)</span>
-</code></pre><ol>
+</code></pre><a id="more"></a>
+<ol>
 <li><p>数据在各个网络层之间是怎么传输的？</p>
 <p>数据在各层之间的单位都是不一样的，</p>
 <pre><code>在物理层数据的单位称为比特（<span class="keyword">bit）；在数据链路层，数据的单位称为帧（frame）；
@@ -331,7 +337,7 @@ public</span><span class="keyword"> static</span> Singleton<span class="function
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zyq001.github.io/2015/08/29/Java-基础（面试题）总结（分享-交流）/" data-id="cidvz3a3c00003ootyc7t0lp8" class="article-share-link">分享到</a>
+      <a data-url="https://zyq001.github.io/2015/04/29/Java-基础（面试题）总结（分享-交流）/" data-id="cidytfo4e00008got0ophfe4e" class="article-share-link">分享到</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/面试/">面试</a></li></ul>
@@ -340,20 +346,6 @@ public</span><span class="keyword"> static</span> Singleton<span class="function
   </div>
   
     
-<nav id="article-nav">
-  
-    <a href="/2015/08/29/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">上一篇</strong>
-      <div class="article-nav-title">
-        
-          Hello World
-        
-      </div>
-    </a>
-  
-  
-</nav>
-
 
   
 </article>
@@ -372,7 +364,7 @@ public</span><span class="keyword"> static</span> Singleton<span class="function
           <li>
             
             <div class="item-thumbnail">
-              <a href="/2015/08/29/hello-world/" class="thumbnail">
+              <a href="/2015/04/29/Java-基础（面试题）总结（分享-交流）/" class="thumbnail">
   
     <span class="thumbnail-image thumbnail-none"></span>
   
@@ -380,26 +372,9 @@ public</span><span class="keyword"> static</span> Singleton<span class="function
             </div>
             
             <div class="item-inner">
-              <p class="item-category"></p>
-              <p class="item-title"><a href="/2015/08/29/hello-world/" class="title">Hello World</a></p>
-              <p class="item-date"><time datetime="2015-08-28T18:21:11.870Z" itemprop="datePublished">2015-08-29</time></p>
-            </div>
-          </li>
-        
-          <li>
-            
-            <div class="item-thumbnail">
-              <a href="/2015/08/29/Java-基础（面试题）总结（分享-交流）/" class="thumbnail">
-  
-    <span class="thumbnail-image thumbnail-none"></span>
-  
-</a>
-            </div>
-            
-            <div class="item-inner">
-              <p class="item-category"></p>
-              <p class="item-title"><a href="/2015/08/29/Java-基础（面试题）总结（分享-交流）/" class="title">Java, 基础（面试题）总结（分享-交流）</a></p>
-              <p class="item-date"><time datetime="2015-08-28T18:02:42.000Z" itemprop="datePublished">2015-08-29</time></p>
+              <p class="item-category"><a class="article-category-link" href="/categories/Java/">Java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Java/面试/">面试</a></p>
+              <p class="item-title"><a href="/2015/04/29/Java-基础（面试题）总结（分享-交流）/" class="title">Java, 基础（面试题）总结（分享-交流）</a></p>
+              <p class="item-date"><time datetime="2015-04-28T18:02:42.000Z" itemprop="datePublished">2015-04-29</time></p>
             </div>
           </li>
         
@@ -409,12 +384,10 @@ public</span><span class="keyword"> static</span> Singleton<span class="function
 
   
     
-  
-    
   <div class="widget-wrap">
-    <h3 class="widget-title">标签</h3>
+    <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/面试/">面试</a><span class="category-list-count">1</span></li></ul></li></ul>
     </div>
   </div>
 
@@ -432,7 +405,7 @@ public</span><span class="keyword"> static</span> Singleton<span class="function
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">八月 2015</a><span class="archive-list-count">2</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
