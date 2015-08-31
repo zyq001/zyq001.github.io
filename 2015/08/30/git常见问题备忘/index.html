@@ -3,17 +3,24 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Archives: 2015 | Mk Zang</title>
+  <title>git常见问题备忘 | Mk Zang</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Mk Zang&apos; blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Mk Zang">
-<meta property="og:url" content="https://zyq001.github.io/archives/2015/index.html">
+  <meta name="description" content="1,github changes not staged for commit   Git在未进行commit操作之前，存在三种状态：Untracked files，   Changes not staged for commit及Changes to be committed，每种状态之间可以随意进行互相转换。
+   -Changes not staged for 
+   commit”状态，表明">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git常见问题备忘">
+<meta property="og:url" content="https://zyq001.github.io/2015/08/30/git常见问题备忘/index.html">
 <meta property="og:site_name" content="Mk Zang">
-<meta property="og:description" content="Mk Zang&apos; blog">
+<meta property="og:description" content="1,github changes not staged for commit   Git在未进行commit操作之前，存在三种状态：Untracked files，   Changes not staged for commit及Changes to be committed，每种状态之间可以随意进行互相转换。
+   -Changes not staged for 
+   commit”状态，表明">
+<meta property="og:updated_time" content="2015-08-31T17:13:29.467Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mk Zang">
-<meta name="twitter:description" content="Mk Zang&apos; blog">
+<meta name="twitter:title" content="git常见问题备忘">
+<meta name="twitter:description" content="1,github changes not staged for commit   Git在未进行commit操作之前，存在三种状态：Untracked files，   Changes not staged for commit及Changes to be committed，每种状态之间可以随意进行互相转换。
+   -Changes not staged for 
+   commit”状态，表明">
   
   
     <link rel="icon" href="favicon.png">
@@ -118,118 +125,88 @@
 </aside>
 
       
-      <section id="main">
-      <div class="archive-year-wrap">
-        <a href="/archives/2015" class="archive-year">2015</a>
-      </div>
-      <section class="archives-wrap">
-        <div class="archives">
+      <section id="main"><article id="post-git常见问题备忘" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
     
-    <div class="archive-article-thumbnail">
-      <a href="/2015/09/01/列式Parquet与行式Avro，对比Benchmarks性能测试/" class="thumbnail">
-  
-    <span class="thumbnail-image thumbnail-none"></span>
-  
-</a>
-    </div>
     
-    <header class="archive-article-header">
-      
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/09/01/列式Parquet与行式Avro，对比Benchmarks性能测试/">列式Parquet与行式Avro，对比Benchmarks性能测试</a>
+    <h1 class="article-title" itemprop="name">
+      git常见问题备忘
     </h1>
   
 
-      
-        
-  <div class="archive-article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2015/09/01/列式Parquet与行式Avro，对比Benchmarks性能测试/">
-      <time datetime="2015-08-31T16:40:09.000Z" itemprop="datePublished">9月 1</time>
-    </a>
-  </div>
-
-
-      
-    </header>
-  </div>
-</article>
-  
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    
-    <div class="archive-article-thumbnail">
-      <a href="/2015/08/30/git常见问题备忘/" class="thumbnail">
-  
-    <span class="thumbnail-image thumbnail-none"></span>
-  
-</a>
-    </div>
-    
-    <header class="archive-article-header">
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/08/30/git常见问题备忘/">git常见问题备忘</a>
-    </h1>
-  
-
-      
-        
-  <div class="archive-article-date">
+        <div class="article-meta">
+          
+  <div class="article-date">
     <i class="fa fa-calendar"></i>
     <a href="/2015/08/30/git常见问题备忘/">
-      <time datetime="2015-08-30T07:15:46.000Z" itemprop="datePublished">8月 30</time>
+      <time datetime="2015-08-30T07:15:46.000Z" itemprop="datePublished">2015-08-30</time>
     </a>
   </div>
 
 
-      
-    </header>
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/git/">git</a>
   </div>
-</article>
-  
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
+
+        </div>
+      </header>
     
-    <div class="archive-article-thumbnail">
-      <a href="/2015/04/29/Java-基础（面试题）总结（分享-交流）/" class="thumbnail">
-  
-    <span class="thumbnail-image thumbnail-none"></span>
-  
-</a>
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <h3 id="1,github_changes_not_staged_for_commit">1,github changes not staged for commit</h3><p>   Git在未进行commit操作之前，存在三种状态：Untracked files，<br>   Changes not staged for commit及Changes to be committed，每种状态之间可以随意进行互相转换。</p>
+<p>   -Changes not staged for </p>
+<p>   commit”状态，表明文件已经修改，但是还没有放入暂存区域，也就是没生成快照。<br>   如果现在进行commit操作，只是将修改之前的文件快照提交到了git目录，<br>   只有暂存区域的文件（即：文件状态为“Changes to be committed”）才会被提交。<br>   正如提示，通过“git add README.txt”命令将已修改文件更新到暂存区域中，<br>   如果想撤销修改，可以使用“git checkout – README.txt”命令。<br>   <a id="more"></a><br>   如果通过git add . 或者 git add * 或者git add 文件名都依然处于not staged状态，那么需要考虑项目中是否有submodule（子模块），<br>   如果有，需要现在submodule中 add &amp; commit，再在主项目中git add才能把最新修改提交到本地版本库。</p>
+
+      
     </div>
+    <footer class="article-footer">
+      <a data-url="https://zyq001.github.io/2015/08/30/git常见问题备忘/" data-id="cie07s672000rroottc9its3o" class="article-share-link">分享到</a>
+      
+        <a href="https://zyq001.github.io/2015/08/30/git常见问题备忘/#ds-thread" class="article-comment-link">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/changes-not-staged/">changes not staged</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/">github</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/问题/">问题</a></li></ul>
+
+    </footer>
+  </div>
+  
     
-    <header class="archive-article-header">
-      
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/04/29/Java-基础（面试题）总结（分享-交流）/">Java, 基础（面试题）总结（分享-交流）</a>
-    </h1>
-  
-
-      
+    <a href="/2015/09/01/列式Parquet与行式Avro，对比Benchmarks性能测试/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
         
-  <div class="archive-article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2015/04/29/Java-基础（面试题）总结（分享-交流）/">
-      <time datetime="2015-04-28T18:02:42.000Z" itemprop="datePublished">4月 29</time>
+          列式Parquet与行式Avro，对比Benchmarks性能测试
+        
+      </div>
     </a>
-  </div>
+  
+  
+    <a href="/2015/04/29/Java-基础（面试题）总结（分享-交流）/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">Java, 基础（面试题）总结（分享-交流）</div>
+    </a>
+  
+</nav>
 
 
-      
-    </header>
-  </div>
+  
 </article>
-  
-    </div></section>
-  
 
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="https://zyq001.github.io/2015/08/30/git常见问题备忘/" data-title="git常见问题备忘" data-url="https://zyq001.github.io/2015/08/30/git常见问题备忘/">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by DuoShuo.</a></noscript>
+      </div>
+  </section>
 
 </section>
       
