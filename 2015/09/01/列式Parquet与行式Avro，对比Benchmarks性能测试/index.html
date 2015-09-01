@@ -5,18 +5,19 @@
   
   <title>列式Parquet与行式Avro，对比Benchmarks性能测试 | Mk Zang</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="关于ParquetParquet是面向分析型业务的列式存储格式，由Twitter和Cloudera合作开发，2015年5月从Apache的孵化器里毕业成为Apache顶级项目，细节请参考[[这里|http://parquet.apache.org/documentation/latest/]]。
+  <meta name="description" content="关于Parquet  Parquet是面向分析型业务的列式存储格式，由Twitter和Cloudera合作开发，2015年5月从Apache的孵化器里毕业成为Apache顶级项目，细节请参考[[这里|http://parquet.apache.org/documentation/latest/]]。
 列式存储">
 <meta property="og:type" content="article">
 <meta property="og:title" content="列式Parquet与行式Avro，对比Benchmarks性能测试">
 <meta property="og:url" content="http://zyq001.github.io/2015/09/01/列式Parquet与行式Avro，对比Benchmarks性能测试/index.html">
 <meta property="og:site_name" content="Mk Zang">
-<meta property="og:description" content="关于ParquetParquet是面向分析型业务的列式存储格式，由Twitter和Cloudera合作开发，2015年5月从Apache的孵化器里毕业成为Apache顶级项目，细节请参考[[这里|http://parquet.apache.org/documentation/latest/]]。
+<meta property="og:description" content="关于Parquet  Parquet是面向分析型业务的列式存储格式，由Twitter和Cloudera合作开发，2015年5月从Apache的孵化器里毕业成为Apache顶级项目，细节请参考[[这里|http://parquet.apache.org/documentation/latest/]]。
 列式存储">
-<meta property="og:updated_time" content="2015-08-31T17:12:58.303Z">
+<meta property="og:image" content="http://zyq001.github.io/images/parquetBenchMarkRest.png">
+<meta property="og:updated_time" content="2015-09-01T17:48:43.222Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="列式Parquet与行式Avro，对比Benchmarks性能测试">
-<meta name="twitter:description" content="关于ParquetParquet是面向分析型业务的列式存储格式，由Twitter和Cloudera合作开发，2015年5月从Apache的孵化器里毕业成为Apache顶级项目，细节请参考[[这里|http://parquet.apache.org/documentation/latest/]]。
+<meta name="twitter:description" content="关于Parquet  Parquet是面向分析型业务的列式存储格式，由Twitter和Cloudera合作开发，2015年5月从Apache的孵化器里毕业成为Apache顶级项目，细节请参考[[这里|http://parquet.apache.org/documentation/latest/]]。
 列式存储">
   
   
@@ -35,7 +36,7 @@
     <header id="header">
   <div id="header-main" class="header-inner">
     <div class="outer">
-      <a href="/" id="logo"><i class="logo" style="background-image: url(/css/images/logo.png)"></i><span class="site-title">Mk Zang</span></a>
+      <a href="/" id="logo"><i class="logo" style="background-image: url(/images/logo.png)"></i><span class="site-title">Mk Zang</span></a>
       <nav id="main-nav">
         
           <a class="main-nav-link" href="/.">主页</a>
@@ -52,7 +53,7 @@
       
         <nav id="sub-nav">
           <div class="profile" id="profile-nav">
-            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="/css/images/avatar.png"><i class="fa fa-caret-down"></i></a>
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="/images/avatar.png"><i class="fa fa-caret-down"></i></a>
           </div>
         </nav>
       
@@ -88,7 +89,7 @@
         <aside id="profile">
   <div class="inner profile-inner">
     <div class="base-info profile-block">
-      <img id="avatar" src="/css/images/avatar.png">
+      <img id="avatar" src="/images/avatar.png">
       <h2 id="name">Mk Zang</h2>
       <h3 id="title">Byr@Java.BigData</h3>
       <span id="location"><i class="fa fa-map-marker"></i>Beijing, China</span>
@@ -111,6 +112,8 @@
           
           <td><a href="https://github.com/zyq001" target="_blank" title="github"><i class="fa fa-github"></i></a></td>
           
+          <td><a href="http://www.facebook.com/" target="_blank" title="facebook"><i class="fa fa-facebook"></i></a></td>
+          
           <td><a href="/atom.xml" target="_blank" title="rss"><i class="fa fa-rss"></i></a></td>
           
         </tr>
@@ -124,6 +127,14 @@
       
       <section id="main"><article id="post-列式Parquet与行式Avro，对比Benchmarks性能测试" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
+    
+      
+	
+		<img src="/images/benchmark.png" class="article-banner">
+	
+
+
+
     
     
     
@@ -148,7 +159,7 @@
           
   <div class="article-category">
   	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/Hadoop/">Hadoop</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Hadoop/HDFS/">HDFS</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Hadoop/HDFS/存储格式/">存储格式</a>
+    <a class="article-category-link" href="/categories/Hadoop/">Hadoop</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Hadoop/HDFS/">HDFS</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Hadoop/HDFS/存储格式/">存储格式</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Hadoop/HDFS/存储格式/Parquet/">Parquet</a>
   </div>
 
         </div>
@@ -157,22 +168,31 @@
     <div class="article-entry" itemprop="articleBody">
       
                 
-        <h2 id="关于Parquet">关于Parquet</h2><p>Parquet是面向分析型业务的列式存储格式，由Twitter和Cloudera合作开发，2015年5月从Apache的孵化器里毕业成为Apache顶级项目，细节请参考[[这里|<a href="http://parquet.apache.org/documentation/latest/]]。" target="_blank" rel="external">http://parquet.apache.org/documentation/latest/]]。</a></p>
+        <h2 id="关于Parquet">关于Parquet</h2><p>  Parquet是面向分析型业务的列式存储格式，由Twitter和Cloudera合作开发，2015年5月从Apache的孵化器里毕业成为Apache顶级项目，细节请参考[[这里|<a href="http://parquet.apache.org/documentation/latest/]]。" target="_blank" rel="external">http://parquet.apache.org/documentation/latest/]]。</a></p>
 <h3 id="列式存储">列式存储</h3><a id="more"></a>
-<p>列式存储和行式存储相比有哪些优势呢？</p>
-<p>  <em>可以跳过不符合条件的数据，只读取需要的数据，降低IO数据量。
-  </em>压缩编码可以降低磁盘存储空间。由于同一列的数据类型是一样的，可以使用更高效的压缩编码（例如Run Length Encoding和Delta Encoding）进一步节约存储空间。<br>  *只读取需要的列，支持向量运算，能够获取更好的扫描性能。</p>
+<p>  列式存储和行式存储相比有哪些优势呢？</p>
+<ul>
+<li>可以跳过不符合条件的数据，只读取需要的数据，降低IO数据量。</li>
+<li>压缩编码可以降低磁盘存储空间。由于同一列的数据类型是一样的，可以使用更高效的压缩编码（例如Run Length Encoding和Delta Encoding）进一步节约存储空间。</li>
+<li>只读取需要的列，支持向量运算，能够获取更好的扫描性能。</li>
+</ul>
 <h3 id="适配多种计算框架">适配多种计算框架</h3><p>Parquet是语言无关的，而且不与任何一种数据处理框架绑定在一起，适配多种语言和组件，能够与Parquet配合的组件有：</p>
-<p>查询引擎: Hive, Impala, Pig, Presto, Drill, Tajo, HAWQ, IBM Big SQL</p>
-<p>计算框架: MapReduce, Spark, Cascading, Crunch, Scalding, Kite</p>
-<p>数据模型: Avro, Thrift, Protocol Buffers, POJOs</p>
-<h3 id="性能">性能</h3><p>Parquet就是基于Google的Dremel系统的数据模型和算法实现的。核心思想是使用“record shredding and assembly algorithm”来表示复杂的嵌套数据类型，同时辅以按列的高效压缩和编码技术，实现降低存</p>
-<p>储空间，提高IO效率，降低上层应用延迟。</p>
+<ul>
+<li>查询引擎: Hive, Impala, Pig, Presto, Drill, Tajo, HAWQ, IBM Big SQL</li>
+</ul>
+<ul>
+<li>计算框架: MapReduce, Spark, Cascading, Crunch, Scalding, Kite</li>
+</ul>
+<ul>
+<li>数据模型: Avro, Thrift, Protocol Buffers, POJOs</li>
+</ul>
+<h3 id="性能">性能</h3><p>Parquet就是基于Google的<strong>Dremel</strong>系统的数据模型和算法实现的。核心思想是使用“record shredding and assembly algorithm”来表示复杂的嵌套数据类型，同时辅以按列的高效压缩和编码技术，实现降低存储空间，提高IO效率，降低上层应用延迟。</p>
 <p>Parquet列式存储带来的性能上的提高在业内已经得到了充分的认可，特别是当你们的表非常宽（column非常多）的时候，Parquet无论在资源利用率还是性能上都优势明显。具体的性能指标详见参考文档。</p>
 <p>Spark已经将Parquet设为默认的文件存储格式，Cloudera投入了很多工程师到Impala+Parquet相关开发中，Hive/Pig都原生支持Parquet。Parquet现在为Twitter至少节省了1/3的存储空间，同时节省了大量的表</p>
 <p>扫描和反序列化的时间。这两方面直接反应就是节约成本和提高性能（详见[[YaqiangZang#benchmark|benchmark]]）。</p>
-<h2 id="benchmark">benchmark</h2><p>以邮箱的展示日志为例，比较了Avro和Parquet两种存储格式的性能：camus-2015/05/24的日志，5,361,809条记录，ns005，hadoop2.4，Spark1.3.1。如下：<br>||-||encoded size(MB,Snappy)||Standlone单线程1列（ms）(read, fliter, count)||SparkSql 1列(ms)(read, fliter, count)||Spark 1列(ms)(read，fliter, count)||Spark 4列(read, count)||<br>||Avro||687||43,634||-||28,469(newAPIHadoopFile：39,226)||29,020||<br>||Parquet||660||3,355||6,981||3,530||9,359||</p>
-<p>备注：1. 测试代码详见[[<a href="https://github.com/zyq001/AvroParquetBenchMark" target="_blank" rel="external">https://github.com/zyq001/AvroParquetBenchMark</a>]]   2. 读取Avro是新老API性能差距较大，目前还未找到原因。</p>
+<h2 id="benchmark">benchmark</h2><p>以邮箱的展示日志为例，比较了Avro和Parquet两种存储格式的性能：camus-2015/05/24的日志，5,361,809条记录，ns005，hadoop2.4，Spark1.3.1。结果见下图：</p>
+<p><img src="/images/parquetBenchMarkRest.png" alt="测试结果"> </p>
+<p>备注：1. 测试代码详见github - <a href="https://github.com/zyq001/AvroParquetBenchMark" target="_blank" rel="external">AvroParquetBenchMark</a>   2. 读取Avro是新老API性能差距较大，目前还未找到原因。</p>
 <h2 id="与Avro">与Avro</h2><p>之前新统计系统（Quipu）的日志都是用Avro做序列化和存储，鉴于Parquet的优势和对Avro的兼容，将HDFS上的存储格式改为Paruqet，并且只需做很小的改动就用原读取Avro的API读取Parquet，单列查询效率可</p>
 <p>以提高近一个数量级。</p>
 <h2 id="Schema">Schema</h2><p>Parquet文件尾部存储了文件的元数据信息和统计信息，自描述的，方便解析。仍沿用原Avro的schema。</p>
@@ -180,7 +200,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zyq001.github.io/2015/09/01/列式Parquet与行式Avro，对比Benchmarks性能测试/" data-id="cie08nss6000cy4otaz32k582" class="article-share-link">分享到</a>
+      <a data-url="http://zyq001.github.io/2015/09/01/列式Parquet与行式Avro，对比Benchmarks性能测试/" data-id="cie1nsk56000cggotjbm9nuzm" class="article-share-link">分享到</a>
       
         <a href="http://zyq001.github.io/2015/09/01/列式Parquet与行式Avro，对比Benchmarks性能测试/#ds-thread" class="article-comment-link">评论</a>
       
@@ -227,7 +247,7 @@
             <div class="item-thumbnail">
               <a href="/2015/09/01/列式Parquet与行式Avro，对比Benchmarks性能测试/" class="thumbnail">
   
-    <span class="thumbnail-image thumbnail-none"></span>
+    <span style="background-image:url(/images/parquet_tn.png)" alt="列式Parquet与行式Avro，对比Benchmarks性能测试" class="thumbnail-image"></span>
   
 </a>
             </div>
@@ -244,7 +264,7 @@
             <div class="item-thumbnail">
               <a href="/2015/08/30/git常见问题备忘/" class="thumbnail">
   
-    <span class="thumbnail-image thumbnail-none"></span>
+    <span style="background-image:url(/images/github_logo.png)" alt="git常见问题备忘" class="thumbnail-image"></span>
   
 </a>
             </div>
@@ -261,7 +281,7 @@
             <div class="item-thumbnail">
               <a href="/2015/04/29/Java-基础（面试题）总结（分享-交流）/" class="thumbnail">
   
-    <span class="thumbnail-image thumbnail-none"></span>
+    <span style="background-image:url(/images/Java_Duke_learning.png)" alt="Java, 基础（面试题）总结（分享-交流）" class="thumbnail-image"></span>
   
 </a>
             </div>
@@ -282,7 +302,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hadoop/">Hadoop</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Hadoop/HDFS/">HDFS</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Hadoop/HDFS/存储格式/">存储格式</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/面试/">面试</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hadoop/">Hadoop</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Hadoop/HDFS/">HDFS</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Hadoop/HDFS/存储格式/">存储格式</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Hadoop/HDFS/存储格式/Parquet/">Parquet</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/面试/">面试</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 

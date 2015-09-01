@@ -886,6 +886,7 @@ a.article-title:hover {
   border: none;
 }
 .article-entry table {
+  border: 1px solid #000;
   width: 100%;
   border-collapse: collapse;
   border-spacing: 0;
@@ -893,41 +894,43 @@ a.article-title:hover {
 .article-entry th {
   font-weight: bold;
   border-bottom: 3px solid #eceff2;
+}
+min-width 100px {
   padding-bottom: 0.5em;
 }
-.article-entry td {
+td {
   border-bottom: 1px solid #eceff2;
   padding: 10px 0;
 }
-.article-entry blockquote {
+blockquote {
   font-family: Georgia, "Times New Roman", serif;
   font-size: 1.4em;
   margin: 1.6em 20px;
   text-align: center;
 }
-.article-entry blockquote footer {
+blockquote footer {
   font-size: 14px;
   margin: 1.6em 0;
   font-family: "open sans", "Helvetica Neue", "Microsoft Yahei", Helvetica, Arial, sans-serif;
 }
-.article-entry blockquote footer cite:before {
+blockquote footer cite:before {
   content: "—";
   padding: 0 0.5em;
 }
-.article-entry .pullquote {
+.pullquote {
   text-align: left;
   width: 45%;
   margin: 0;
 }
-.article-entry .pullquote.left {
+.pullquote.left {
   margin-left: 0.5em;
   margin-right: 1em;
 }
-.article-entry .pullquote.right {
+.pullquote.right {
   margin-right: 0.5em;
   margin-left: 1em;
 }
-.article-entry .caption {
+.caption {
   color: #999;
   display: block;
   font-size: 0.9em;
@@ -935,15 +938,15 @@ a.article-title:hover {
   position: relative;
   text-align: center;
 }
-.article-entry .video-container {
+.video-container {
   position: relative;
   padding-top: 56.25%;
   height: 0;
   overflow: hidden;
 }
-.article-entry .video-container iframe,
-.article-entry .video-container object,
-.article-entry .video-container embed {
+.video-container iframe,
+.video-container object,
+.video-container embed {
   position: absolute;
   top: 0;
   left: 0;
@@ -1528,7 +1531,7 @@ ol.toc {
   color: #ccc;
   line-height: 22.400000000000002px;
 }
-.article-entry .highlight .gutter pre,
+.article-entry .gutter pre,
 .article-entry .gist .gist-file .gist-data .line-numbers {
   color: #666;
   font-size: 0.85em;
@@ -1552,36 +1555,38 @@ ol.toc {
   margin: 0;
   padding: 0;
 }
-.article-entry .highlight table {
+.article-entry margin-top 1 {
+  border-spacing: 1;
+  border: 0px;
   margin: 0;
   width: auto;
 }
-.article-entry .highlight td {
+.article-entry td {
   border: none;
   padding: 0;
 }
-.article-entry .highlight figcaption {
+.article-entry figcaption {
   font-size: 0.85em;
   color: #999;
   line-height: 1em;
   margin-bottom: 1em;
 }
-.article-entry .highlight figcaption:before,
-.article-entry .highlight figcaption:after {
+.article-entry figcaption:before,
+.article-entry figcaption:after {
   content: "";
   display: table;
 }
-.article-entry .highlight figcaption:after {
+.article-entry figcaption:after {
   clear: both;
 }
-.article-entry .highlight figcaption a {
+.article-entry figcaption a {
   float: right;
 }
-.article-entry .highlight .gutter pre {
+.article-entry .gutter pre {
   text-align: right;
   padding-right: 20px;
 }
-.article-entry .highlight .line {
+.article-entry .line {
   height: 22.400000000000002px;
 }
 .article-entry .gist {
