@@ -347,7 +347,7 @@ public</span><span class="keyword"> static</span> Singleton<span class="function
     <link href="http://zyq001.github.io/2015/03/15/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B4%A2%E5%BC%95%E5%8E%9F%E7%90%86/"/>
     <id>http://zyq001.github.io/2015/03/15/数据库索引原理/</id>
     <published>2015-03-14T16:15:47.000Z</published>
-    <updated>2015-09-02T16:45:08.355Z</updated>
+    <updated>2015-09-02T17:08:12.382Z</updated>
     <content type="html"><![CDATA[<p>强烈建议参阅链接：<a href="http://www.linezing.com/blog/?p=798#nav-1" target="_blank" rel="external">http://www.linezing.com/blog/?p=798#nav-1</a></p>
 <h2 id="索引问题就是一个查找问题。。。">索引问题就是一个<strong>查找问题</strong>。。。</h2><hr>
 <p><strong>数据库索引</strong>，是数据库管理系统中一个排序的数据结构，以协助快速查询、更新数据库表中数据。索引的实现通常使用<strong>B树</strong>及其变种<strong>B+树</strong>。<br>在数据之外，数据库系统还维护着满足特定查找算法的数据结构，这些数据结构以某种方式引用（指向）数据，这样就可以在这些数据结构上实现高级查找算法。这种数据结构，就是索引。<br>为表设置索引要付出代价的：一是增加了数据库的存储空间，二是在插入和修改数据时要花费较多的时间(因为索引也要随之变动)。<br><img src="/images/index.png" alt="索引"><br>上图展示了一种可能的索引方式。左边是数据表，一共有两列七条记录，最左边的是数据记录的物理地址（注意逻辑上相邻的记录在磁盘上也并不是一定物理相邻的）。为了加快Col2的查找，可以维护一个右边所示的二叉查找树，每个节点分别包含索引键值和一个指向对应数据记录物理地址的指针，这样就可以运用二叉查找在O(log2n)的复杂度内获取到相应数据。  </p>
@@ -470,8 +470,8 @@ public</span><span class="keyword"> static</span> Singleton<span class="function
     <link href="http://zyq001.github.io/2015/03/02/Java-%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6%E5%AD%A6%E4%B9%A0/"/>
     <id>http://zyq001.github.io/2015/03/02/Java-类加载机制学习/</id>
     <published>2015-03-02T15:43:31.000Z</published>
-    <updated>2015-09-02T16:46:13.866Z</updated>
-    <content type="html"><![CDATA[<h1 id="虚拟机**类加载机制：">虚拟机**类加载机制：</h1><p>&#8195;&#8195;<strong>虚拟机把描述类的数据从class文件加载到内存，并对数据进行校验、转换解析和初始化，最终形成可以被虚拟机直接使用的Java类型。<br>&#8195;&#8195;Java语言里，类型的</strong>加载<strong>和</strong>连接<strong>过程是在</strong>程序运行**期间完成的。  </p>
+    <updated>2015-09-02T17:09:30.716Z</updated>
+    <content type="html"><![CDATA[<h1 id="虚拟机类加载机制：">虚拟机类加载机制：</h1><p>&#8195;&#8195;<strong>虚拟机把描述类的数据从class文件加载到内存，并对数据进行校验、转换解析和初始化，最终形成可以被虚拟机直接使用的Java类型。<br>&#8195;&#8195;Java语言里，类型的</strong>加载<strong>和</strong>连接<strong>过程是在</strong>程序运行**期间完成的。  </p>
 <p>类的<strong>生命周期：</strong><br>　　<strong>加载</strong> loading<br>　　<strong>验证</strong> verification<br>　　<strong>准备</strong> preparation<br>　　<strong>解析</strong> resolution<br>　　<strong>初始化</strong> initialization<br>　　<strong>使用</strong> using<br>　　<strong>卸载</strong> unloading  </p>
 <p>&#8195;&#8195;<strong>加载</strong>、<strong>验证</strong>、<strong>准备</strong>、<strong>初始化</strong>、<strong>卸载</strong>5个阶段顺序是确定的，按这个顺序“开始”的。<br>&#8194;&#8194;&#8194;&#8194;解析可能发生在初始化之后，为了支持动态绑定通常互相交叉地混合进行一个阶段执行的过程中调用、激活另一阶段。</p>
 <h2 id="主动引用&amp;被动引用：">主动引用&amp;被动引用：</h2><hr>
@@ -568,7 +568,7 @@ public</span><span class="keyword"> static</span> Singleton<span class="function
 <h3 id="对象创建：">对象创建：</h3><p>类加载-开内存-引用入栈本地变量表（及当前调用new对象的方法的本地变量表）<br>引用reference：①存句柄地址 句柄包含具体对象实例数据和类型数据地址信息；优点：稳定的引用地址，对象被移动只需改变句柄里的地址，缺点：多一次指针定位的开销<br>②直接指针：存对象地址 快  HotSpot采用</p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<h1 id="虚拟机**类加载机制：">虚拟机**类加载机制：</h1><p>&#8195;&#8195;<strong>虚拟机把描述类的数据从class文件加载到内存，并对数据进行校验、转换解析和初始化，最终形成可以被虚拟机直接使用的Java类型。<br>&#8195;&#8195;Java语言里，类型的</strong>加载<strong>和</strong>连接<strong>过程是在</strong>程序运行**期间完成的。  </p>
+    <![CDATA[<h1 id="虚拟机类加载机制：">虚拟机类加载机制：</h1><p>&#8195;&#8195;<strong>虚拟机把描述类的数据从class文件加载到内存，并对数据进行校验、转换解析和初始化，最终形成可以被虚拟机直接使用的Java类型。<br>&#8195;&#8195;Java语言里，类型的</strong>加载<strong>和</strong>连接<strong>过程是在</strong>程序运行**期间完成的。  </p>
 <p>类的<strong>生命周期：</strong><br>　　<strong>加载</strong> loading<br>　　<strong>验证</strong> verification<br>　　<strong>准备</strong> preparation<br>　　<strong>解析</strong> resolution<br>　　<strong>初始化</strong> initialization<br>　　<strong>使用</strong> using<br>　　<strong>卸载</strong> unloading  </p>
 <p>&#8195;&#8195;<strong>加载</strong>、<strong>验证</strong>、<strong>准备</strong>、<strong>初始化</strong>、<strong>卸载</strong>5个阶段顺序是确定的，按这个顺序“开始”的。<br>&#8194;&#8194;&#8194;&#8194;解析可能发生在初始化之后，为了支持动态绑定通常互相交叉地混合进行一个阶段执行的过程中调用、激活另一阶段。</p>
 <h2 id="主动引用&amp;被动引用：">主动引用&amp;被动引用：</h2><hr>]]>
@@ -579,7 +579,7 @@ public</span><span class="keyword"> static</span> Singleton<span class="function
     
       <category term="Java" scheme="http://zyq001.github.io/tags/Java/"/>
     
-      <category term="JAVA" scheme="http://zyq001.github.io/categories/JAVA/"/>
+      <category term="Java" scheme="http://zyq001.github.io/categories/Java/"/>
     
   </entry>
   

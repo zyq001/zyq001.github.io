@@ -5,20 +5,20 @@
   
   <title>Java 类加载机制学习 | Mk Zang</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="虚拟机**类加载机制：&amp;#8195;&amp;#8195;虚拟机把描述类的数据从class文件加载到内存，并对数据进行校验、转换解析和初始化，最终形成可以被虚拟机直接使用的Java类型。&amp;#8195;&amp;#8195;Java语言里，类型的加载和连接过程是在程序运行**期间完成的。  
-类的生命周期：　　加载 loading　　验证 verification　　准备 preparation　　解析 resol">
+  <meta name="description" content="虚拟机类加载机制：&amp;#8195;&amp;#8195;虚拟机把描述类的数据从class文件加载到内存，并对数据进行校验、转换解析和初始化，最终形成可以被虚拟机直接使用的Java类型。&amp;#8195;&amp;#8195;Java语言里，类型的加载和连接过程是在程序运行**期间完成的。  
+类的生命周期：　　加载 loading　　验证 verification　　准备 preparation　　解析 resolut">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java 类加载机制学习">
 <meta property="og:url" content="http://zyq001.github.io/2015/03/02/Java-类加载机制学习/index.html">
 <meta property="og:site_name" content="Mk Zang">
-<meta property="og:description" content="虚拟机**类加载机制：&amp;#8195;&amp;#8195;虚拟机把描述类的数据从class文件加载到内存，并对数据进行校验、转换解析和初始化，最终形成可以被虚拟机直接使用的Java类型。&amp;#8195;&amp;#8195;Java语言里，类型的加载和连接过程是在程序运行**期间完成的。  
-类的生命周期：　　加载 loading　　验证 verification　　准备 preparation　　解析 resol">
+<meta property="og:description" content="虚拟机类加载机制：&amp;#8195;&amp;#8195;虚拟机把描述类的数据从class文件加载到内存，并对数据进行校验、转换解析和初始化，最终形成可以被虚拟机直接使用的Java类型。&amp;#8195;&amp;#8195;Java语言里，类型的加载和连接过程是在程序运行**期间完成的。  
+类的生命周期：　　加载 loading　　验证 verification　　准备 preparation　　解析 resolut">
 <meta property="og:image" content="http://zyq001.github.io/images/JvmLoad/classLoader.jpeg">
-<meta property="og:updated_time" content="2015-09-02T16:46:13.866Z">
+<meta property="og:updated_time" content="2015-09-02T17:09:30.716Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java 类加载机制学习">
-<meta name="twitter:description" content="虚拟机**类加载机制：&amp;#8195;&amp;#8195;虚拟机把描述类的数据从class文件加载到内存，并对数据进行校验、转换解析和初始化，最终形成可以被虚拟机直接使用的Java类型。&amp;#8195;&amp;#8195;Java语言里，类型的加载和连接过程是在程序运行**期间完成的。  
-类的生命周期：　　加载 loading　　验证 verification　　准备 preparation　　解析 resol">
+<meta name="twitter:description" content="虚拟机类加载机制：&amp;#8195;&amp;#8195;虚拟机把描述类的数据从class文件加载到内存，并对数据进行校验、转换解析和初始化，最终形成可以被虚拟机直接使用的Java类型。&amp;#8195;&amp;#8195;Java语言里，类型的加载和连接过程是在程序运行**期间完成的。  
+类的生命周期：　　加载 loading　　验证 verification　　准备 preparation　　解析 resolut">
   
   
     <link rel="icon" href="images/favicon.png">
@@ -128,6 +128,14 @@
       <section id="main"><article id="post-Java-类加载机制学习" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
+      
+	
+		<img src="/images/loader_01.jpg" class="article-banner">
+	
+
+
+
+    
     
     
       <header class="article-header">
@@ -151,7 +159,7 @@
           
   <div class="article-category">
   	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/JAVA/">JAVA</a>
+    <a class="article-category-link" href="/categories/Java/">Java</a>
   </div>
 
         </div>
@@ -160,7 +168,7 @@
     <div class="article-entry" itemprop="articleBody">
       
                 
-        <h1 id="虚拟机**类加载机制：">虚拟机**类加载机制：</h1><p>&#8195;&#8195;<strong>虚拟机把描述类的数据从class文件加载到内存，并对数据进行校验、转换解析和初始化，最终形成可以被虚拟机直接使用的Java类型。<br>&#8195;&#8195;Java语言里，类型的</strong>加载<strong>和</strong>连接<strong>过程是在</strong>程序运行**期间完成的。  </p>
+        <h1 id="虚拟机类加载机制：">虚拟机类加载机制：</h1><p>&#8195;&#8195;<strong>虚拟机把描述类的数据从class文件加载到内存，并对数据进行校验、转换解析和初始化，最终形成可以被虚拟机直接使用的Java类型。<br>&#8195;&#8195;Java语言里，类型的</strong>加载<strong>和</strong>连接<strong>过程是在</strong>程序运行**期间完成的。  </p>
 <p>类的<strong>生命周期：</strong><br>　　<strong>加载</strong> loading<br>　　<strong>验证</strong> verification<br>　　<strong>准备</strong> preparation<br>　　<strong>解析</strong> resolution<br>　　<strong>初始化</strong> initialization<br>　　<strong>使用</strong> using<br>　　<strong>卸载</strong> unloading  </p>
 <p>&#8195;&#8195;<strong>加载</strong>、<strong>验证</strong>、<strong>准备</strong>、<strong>初始化</strong>、<strong>卸载</strong>5个阶段顺序是确定的，按这个顺序“开始”的。<br>&#8194;&#8194;&#8194;&#8194;解析可能发生在初始化之后，为了支持动态绑定通常互相交叉地混合进行一个阶段执行的过程中调用、激活另一阶段。</p>
 <h2 id="主动引用&amp;被动引用：">主动引用&amp;被动引用：</h2><hr>
@@ -361,8 +369,7 @@
             <div class="item-thumbnail">
               <a href="/2015/03/15/数据库索引原理/" class="thumbnail">
   
-    <span style="background-image:url(/images/index.png
-)" alt="笔记-数据库索引原理" class="thumbnail-image"></span>
+    <span style="background-image:url(/images/database.png)" alt="笔记-数据库索引原理" class="thumbnail-image"></span>
   
 </a>
             </div>
@@ -379,14 +386,13 @@
             <div class="item-thumbnail">
               <a href="/2015/03/02/Java-类加载机制学习/" class="thumbnail">
   
-    <span style="background-image:url(/images/JvmLoad/classLoader.jpeg
-)" alt="Java 类加载机制学习" class="thumbnail-image"></span>
+    <span style="background-image:url(/images/loader_gif.gif)" alt="Java 类加载机制学习" class="thumbnail-image"></span>
   
 </a>
             </div>
             
             <div class="item-inner">
-              <p class="item-category"><a class="article-category-link" href="/categories/JAVA/">JAVA</a></p>
+              <p class="item-category"><a class="article-category-link" href="/categories/Java/">Java</a></p>
               <p class="item-title"><a href="/2015/03/02/Java-类加载机制学习/" class="title">Java 类加载机制学习</a></p>
               <p class="item-date"><time datetime="2015-03-02T15:43:31.000Z" itemprop="datePublished">2015-03-02</time></p>
             </div>
@@ -401,7 +407,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hadoop/">Hadoop</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Hadoop/HDFS/">HDFS</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Hadoop/HDFS/存储格式/">存储格式</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Hadoop/HDFS/存储格式/Parquet/">Parquet</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/JAVA/">JAVA</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/面试/">面试</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hadoop/">Hadoop</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Hadoop/HDFS/">HDFS</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Hadoop/HDFS/存储格式/">存储格式</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Hadoop/HDFS/存储格式/Parquet/">Parquet</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/面试/">面试</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
