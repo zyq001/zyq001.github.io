@@ -1,188 +1,114 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Mk Zang]]></title>
   
-  <title>Java, 基础（面试题）总结（分享-交流） | Mk Zang</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1. Finally，final，finalize
-Finally：  释放资源（内存之外的，打开的文件、连接、屏幕上的图形，，）
-
-总会执行
-非后台线程结束，后台线程被强关，不会执行finally
-当try和catch中有return时，finally在return之后执行，但是返回值不会改变（finally中不会改变已保存的返回结果）
-finally中最好不要包含return，否则程序会从fi">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Java, 基础（面试题）总结（分享-交流）">
-<meta property="og:url" content="http://zyq001.github.io/2015/04/29/Java-基础（面试题）总结（分享-交流）/index.html">
-<meta property="og:site_name" content="Mk Zang">
-<meta property="og:description" content="1. Finally，final，finalize
-Finally：  释放资源（内存之外的，打开的文件、连接、屏幕上的图形，，）
-
-总会执行
-非后台线程结束，后台线程被强关，不会执行finally
-当try和catch中有return时，finally在return之后执行，但是返回值不会改变（finally中不会改变已保存的返回结果）
-finally中最好不要包含return，否则程序会从fi">
-<meta property="og:updated_time" content="2015-09-01T17:27:20.838Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java, 基础（面试题）总结（分享-交流）">
-<meta name="twitter:description" content="1. Finally，final，finalize
-Finally：  释放资源（内存之外的，打开的文件、连接、屏幕上的图形，，）
-
-总会执行
-非后台线程结束，后台线程被强关，不会执行finally
-当try和catch中有return时，finally在return之后执行，但是返回值不会改变（finally中不会改变已保存的返回结果）
-finally中最好不要包含return，否则程序会从fi">
+  <link href="/atom.xml" rel="self"/>
+  <link href="http://zyq001.github.io/"/>
+  <updated>2015-09-01T17:48:43.222Z</updated>
+  <id>http://zyq001.github.io/</id>
   
+  <author>
+    <name><![CDATA[Mk Zang]]></name>
+    
+  </author>
   
-    <link rel="icon" href="favicon.png">
+  <generator uri="http://hexo.io/">Hexo</generator>
   
-  <link href='//fonts.useso.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
-  <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="/css/style.css" type="text/css">
-  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  <entry>
+    <title><![CDATA[列式Parquet与行式Avro，对比Benchmarks性能测试]]></title>
+    <link href="http://zyq001.github.io/2015/09/01/%E5%88%97%E5%BC%8FParquet%E4%B8%8E%E8%A1%8C%E5%BC%8FAvro%EF%BC%8C%E5%AF%B9%E6%AF%94Benchmarks%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/"/>
+    <id>http://zyq001.github.io/2015/09/01/列式Parquet与行式Avro，对比Benchmarks性能测试/</id>
+    <published>2015-08-31T16:40:09.000Z</published>
+    <updated>2015-09-01T17:48:43.222Z</updated>
+    <content type="html"><![CDATA[<h2 id="关于Parquet">关于Parquet</h2><p>  Parquet是面向分析型业务的列式存储格式，由Twitter和Cloudera合作开发，2015年5月从Apache的孵化器里毕业成为Apache顶级项目，细节请参考[[这里|<a href="http://parquet.apache.org/documentation/latest/]]。" target="_blank" rel="external">http://parquet.apache.org/documentation/latest/]]。</a></p>
+<h3 id="列式存储">列式存储</h3><a id="more"></a>
+<p>  列式存储和行式存储相比有哪些优势呢？</p>
+<ul>
+<li>可以跳过不符合条件的数据，只读取需要的数据，降低IO数据量。</li>
+<li>压缩编码可以降低磁盘存储空间。由于同一列的数据类型是一样的，可以使用更高效的压缩编码（例如Run Length Encoding和Delta Encoding）进一步节约存储空间。</li>
+<li>只读取需要的列，支持向量运算，能够获取更好的扫描性能。</li>
+</ul>
+<h3 id="适配多种计算框架">适配多种计算框架</h3><p>Parquet是语言无关的，而且不与任何一种数据处理框架绑定在一起，适配多种语言和组件，能够与Parquet配合的组件有：</p>
+<ul>
+<li>查询引擎: Hive, Impala, Pig, Presto, Drill, Tajo, HAWQ, IBM Big SQL</li>
+</ul>
+<ul>
+<li>计算框架: MapReduce, Spark, Cascading, Crunch, Scalding, Kite</li>
+</ul>
+<ul>
+<li>数据模型: Avro, Thrift, Protocol Buffers, POJOs</li>
+</ul>
+<h3 id="性能">性能</h3><p>Parquet就是基于Google的<strong>Dremel</strong>系统的数据模型和算法实现的。核心思想是使用“record shredding and assembly algorithm”来表示复杂的嵌套数据类型，同时辅以按列的高效压缩和编码技术，实现降低存储空间，提高IO效率，降低上层应用延迟。</p>
+<p>Parquet列式存储带来的性能上的提高在业内已经得到了充分的认可，特别是当你们的表非常宽（column非常多）的时候，Parquet无论在资源利用率还是性能上都优势明显。具体的性能指标详见参考文档。</p>
+<p>Spark已经将Parquet设为默认的文件存储格式，Cloudera投入了很多工程师到Impala+Parquet相关开发中，Hive/Pig都原生支持Parquet。Parquet现在为Twitter至少节省了1/3的存储空间，同时节省了大量的表</p>
+<p>扫描和反序列化的时间。这两方面直接反应就是节约成本和提高性能（详见[[YaqiangZang#benchmark|benchmark]]）。</p>
+<h2 id="benchmark">benchmark</h2><p>以邮箱的展示日志为例，比较了Avro和Parquet两种存储格式的性能：camus-2015/05/24的日志，5,361,809条记录，ns005，hadoop2.4，Spark1.3.1。结果见下图：</p>
+<p><img src="/images/parquetBenchMarkRest.png" alt="测试结果"> </p>
+<p>备注：1. 测试代码详见github - <a href="https://github.com/zyq001/AvroParquetBenchMark" target="_blank" rel="external">AvroParquetBenchMark</a>   2. 读取Avro是新老API性能差距较大，目前还未找到原因。</p>
+<h2 id="与Avro">与Avro</h2><p>之前新统计系统（Quipu）的日志都是用Avro做序列化和存储，鉴于Parquet的优势和对Avro的兼容，将HDFS上的存储格式改为Paruqet，并且只需做很小的改动就用原读取Avro的API读取Parquet，单列查询效率可</p>
+<p>以提高近一个数量级。</p>
+<h2 id="Schema">Schema</h2><p>Parquet文件尾部存储了文件的元数据信息和统计信息，自描述的，方便解析。仍沿用原Avro的schema。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="关于Parquet">关于Parquet</h2><p>  Parquet是面向分析型业务的列式存储格式，由Twitter和Cloudera合作开发，2015年5月从Apache的孵化器里毕业成为Apache顶级项目，细节请参考[[这里|<a href="http://parquet.apache.org/documentation/latest/]]。">http://parquet.apache.org/documentation/latest/]]。</a></p>
+<h3 id="列式存储">列式存储</h3>]]>
+    
+    </summary>
+    
+      <category term="HDFS" scheme="http://zyq001.github.io/tags/HDFS/"/>
+    
+      <category term="Spark" scheme="http://zyq001.github.io/tags/Spark/"/>
+    
+      <category term="parquet" scheme="http://zyq001.github.io/tags/parquet/"/>
+    
+      <category term="列式存储" scheme="http://zyq001.github.io/tags/%E5%88%97%E5%BC%8F%E5%AD%98%E5%82%A8/"/>
+    
+      <category term="Hadoop" scheme="http://zyq001.github.io/categories/Hadoop/"/>
+    
+      <category term="HDFS" scheme="http://zyq001.github.io/categories/Hadoop/HDFS/"/>
+    
+      <category term="存储格式" scheme="http://zyq001.github.io/categories/Hadoop/HDFS/%E5%AD%98%E5%82%A8%E6%A0%BC%E5%BC%8F/"/>
+    
+      <category term="Parquet" scheme="http://zyq001.github.io/categories/Hadoop/HDFS/%E5%AD%98%E5%82%A8%E6%A0%BC%E5%BC%8F/Parquet/"/>
+    
+  </entry>
   
-
+  <entry>
+    <title><![CDATA[git常见问题备忘]]></title>
+    <link href="http://zyq001.github.io/2015/08/30/git%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E5%A4%87%E5%BF%98/"/>
+    <id>http://zyq001.github.io/2015/08/30/git常见问题备忘/</id>
+    <published>2015-08-30T07:15:46.000Z</published>
+    <updated>2015-09-01T17:23:15.101Z</updated>
+    <content type="html"><![CDATA[<h3 id="1,github_changes_not_staged_for_commit">1,github changes not staged for commit</h3><p>   Git在未进行commit操作之前，存在三种状态：Untracked files，<br>   Changes not staged for commit及Changes to be committed，每种状态之间可以随意进行互相转换。</p>
+<p>   -Changes not staged for </p>
+<p>   commit”状态，表明文件已经修改，但是还没有放入暂存区域，也就是没生成快照。<br>   如果现在进行commit操作，只是将修改之前的文件快照提交到了git目录，<br>   只有暂存区域的文件（即：文件状态为“Changes to be committed”）才会被提交。<br>   正如提示，通过“git add README.txt”命令将已修改文件更新到暂存区域中，<br>   如果想撤销修改，可以使用“git checkout – README.txt”命令。<br>   <a id="more"></a><br>   如果通过git add . 或者 git add * 或者git add 文件名都依然处于not staged状态，那么需要考虑项目中是否有submodule（子模块），<br>   如果有，需要现在submodule中 add &amp; commit，再在主项目中git add才能把最新修改提交到本地版本库。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h3 id="1,github_changes_not_staged_for_commit">1,github changes not staged for commit</h3><p>   Git在未进行commit操作之前，存在三种状态：Untracked files，<br>   Changes not staged for commit及Changes to be committed，每种状态之间可以随意进行互相转换。</p>
+<p>   -Changes not staged for </p>
+<p>   commit”状态，表明文件已经修改，但是还没有放入暂存区域，也就是没生成快照。<br>   如果现在进行commit操作，只是将修改之前的文件快照提交到了git目录，<br>   只有暂存区域的文件（即：文件状态为“Changes to be committed”）才会被提交。<br>   正如提示，通过“git add README.txt”命令将已修改文件更新到暂存区域中，<br>   如果想撤销修改，可以使用“git checkout – README.txt”命令。<br>]]>
+    
+    </summary>
+    
+      <category term="changes not staged" scheme="http://zyq001.github.io/tags/changes-not-staged/"/>
+    
+      <category term="git" scheme="http://zyq001.github.io/tags/git/"/>
+    
+      <category term="github" scheme="http://zyq001.github.io/tags/github/"/>
+    
+      <category term="问题" scheme="http://zyq001.github.io/tags/%E9%97%AE%E9%A2%98/"/>
+    
+      <category term="git" scheme="http://zyq001.github.io/categories/git/"/>
+    
+  </entry>
   
-</head>
-<body>
-  <div id="container">
-    <header id="header">
-  <div id="header-main" class="header-inner">
-    <div class="outer">
-      <a href="/" id="logo"><i class="logo" style="background-image: url(/images/logo.png)"></i><span class="site-title">Mk Zang</span></a>
-      <nav id="main-nav">
-        
-          <a class="main-nav-link" href="/.">主页</a>
-        
-          <a class="main-nav-link" href="/archives">归档</a>
-        
-          <a class="main-nav-link" href="/categories">分类</a>
-        
-          <a class="main-nav-link" href="/tags">标签</a>
-        
-          <a class="main-nav-link" href="/resume">简历</a>
-        
-      </nav>
-      
-        <nav id="sub-nav">
-          <div class="profile" id="profile-nav">
-            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="/images/avatar.png"><i class="fa fa-caret-down"></i></a>
-          </div>
-        </nav>
-      
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="sitesearch" value="http://zyq001.github.io"></form>
-      </div>
-    </div>
-  </div>
-  <div id="main-nav-mobile" class="header-sub header-inner">
-    <table class="menu outer">
-      <tr>
-        
-          <td><a class="main-nav-link" href="/.">主页</a></td>
-        
-          <td><a class="main-nav-link" href="/archives">归档</a></td>
-        
-          <td><a class="main-nav-link" href="/categories">分类</a></td>
-        
-          <td><a class="main-nav-link" href="/tags">标签</a></td>
-        
-          <td><a class="main-nav-link" href="/resume">简历</a></td>
-        
-        <td>
-          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="hidden" name="sitesearch" value="http://zyq001.github.io"></form>
-        </td>
-      </tr>
-    </table>
-  </div>
-</header>
-
-    <div class="outer">
-      
-        <aside id="profile">
-  <div class="inner profile-inner">
-    <div class="base-info profile-block">
-      <img id="avatar" src="/images/avatar.png">
-      <h2 id="name">Mk Zang</h2>
-      <h3 id="title">Byr@Java.BigData</h3>
-      <span id="location"><i class="fa fa-map-marker"></i>Beijing, China</span>
-      <a id="follow" href="https://github.com/zyq001/">+关注</a>
-    </div>
-    <div class="article-info profile-block">
-      <div class="article-info-block">
-        3
-        <span>文章</span>
-      </div>
-      <div class="article-info-block">
-        10
-        <span>标签</span>
-      </div>
-    </div>
-    
-    <div class="contact-info profile-block">
-      <table class="contact-list">
-        <tr>
-          
-          <td><a href="http://github.com/zyq001" target="_blank" title="github"><i class="fa fa-github"></i></a></td>
-          
-          <td><a href="http://www.facebook.com/mike.zang" target="_blank" title="facebook"><i class="fa fa-facebook"></i></a></td>
-          
-          <td><a href="/atom.xml" target="_blank" title="rss"><i class="fa fa-rss"></i></a></td>
-          
-        </tr>
-      </table>
-    </div>
-    
-    
-  </div>
-</aside>
-
-      
-      <section id="main"><article id="post-Java-基础（面试题）总结（分享-交流）" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      
-	
-		<img src="/images/interview.jpg" class="article-banner">
-	
-
-
-
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      Java, 基础（面试题）总结（分享-交流）
-    </h1>
-  
-
-        <div class="article-meta">
-          
-  <div class="article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2015/04/29/Java-基础（面试题）总结（分享-交流）/">
-      <time datetime="2015-04-28T18:02:42.000Z" itemprop="datePublished">2015-04-29</time>
-    </a>
-  </div>
-
-
-          
-  <div class="article-category">
-  	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/Java/">Java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Java/面试/">面试</a>
-  </div>
-
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-                
-        <h3 id="1-_Finally，final，finalize">1. Finally，final，finalize</h3><ul>
+  <entry>
+    <title><![CDATA[Java, 基础（面试题）总结（分享-交流）]]></title>
+    <link href="http://zyq001.github.io/2015/04/29/Java-%E5%9F%BA%E7%A1%80%EF%BC%88%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%89%E6%80%BB%E7%BB%93%EF%BC%88%E5%88%86%E4%BA%AB-%E4%BA%A4%E6%B5%81%EF%BC%89/"/>
+    <id>http://zyq001.github.io/2015/04/29/Java-基础（面试题）总结（分享-交流）/</id>
+    <published>2015-04-28T18:02:42.000Z</published>
+    <updated>2015-09-01T17:27:20.838Z</updated>
+    <content type="html"><![CDATA[<h3 id="1-_Finally，final，finalize">1. Finally，final，finalize</h3><ul>
 <li><p>Finally：<br>  释放资源（内存之外的，打开的文件、连接、屏幕上的图形，，）</p>
 <ul>
 <li>总会执行</li>
@@ -389,176 +315,31 @@ public</span><span class="keyword"> static</span> Singleton<span class="function
 <ol>
 <li>指向之类对象的指针，调用子类对象的方法(如果已重写父类方法，否则默认调父类方法)</li>
 </ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://zyq001.github.io/2015/04/29/Java-基础（面试题）总结（分享-交流）/" data-id="cie2wmm5k0000awotr8y7ykt9" class="article-share-link">分享到</a>
-      
-        <a href="http://zyq001.github.io/2015/04/29/Java-基础（面试题）总结（分享-交流）/#ds-thread" class="article-comment-link">评论</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/面试/">面试</a></li></ul>
-
-    </footer>
-  </div>
-  
+]]></content>
+    <summary type="html">
+    <![CDATA[<h3 id="1-_Finally，final，finalize">1. Finally，final，finalize</h3><ul>
+<li><p>Finally：<br>  释放资源（内存之外的，打开的文件、连接、屏幕上的图形，，）</p>
+<ul>
+<li>总会执行</li>
+<li>非后台线程结束，后台线程被强关，不会执行finally</li>
+<li>当try和catch中有return时，finally在return之后执行，但是返回值不会改变（finally中不会改变已保存的返回结果）</li>
+<li>finally中最好不要包含return，否则程序会从finally中退出，返回值不是try或catch中保存的返回值。</li>
+</ul>
+</li>
+<li><p>final：<br>  基本数据类型：不可更改<br>  类：不可继承<br>  对象：引用不可变，对象内容可变</p>
+</li>
+<li><p>finalze：<br>回收前调用，不适合用来清理或释放资源。对象免死最后机会！保证会被调用，但不保证会执行完(在低优先级线程中执行)</p>]]>
     
-<nav id="article-nav">
-  
-    <a href="/2015/08/30/git常见问题备忘/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">上一篇</strong>
-      <div class="article-nav-title">
-        
-          git常见问题备忘
-        
-      </div>
-    </a>
-  
-  
-</nav>
-
-
-  
-</article>
-
-
-  <section id="comments">
-    <div id="ds-thread" class="ds-thread" data-thread-key="http://zyq001.github.io/2015/04/29/Java-基础（面试题）总结（分享-交流）/" data-title="Java, 基础（面试题）总结（分享-交流）" data-url="http://zyq001.github.io/2015/04/29/Java-基础（面试题）总结（分享-交流）/">
-      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by DuoShuo.</a></noscript>
-      </div>
-  </section>
-
-</section>
-      
-        <aside id="sidebar">
-  
+    </summary>
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">最新文章</h3>
-    <div class="widget">
-      <ul id="recent-post" class="">
-        
-          <li>
-            
-            <div class="item-thumbnail">
-              <a href="/2015/09/01/列式Parquet与行式Avro，对比Benchmarks性能测试/" class="thumbnail">
-  
-    <span style="background-image:url(/images/parquet_tn.png)" alt="列式Parquet与行式Avro，对比Benchmarks性能测试" class="thumbnail-image"></span>
-  
-</a>
-            </div>
-            
-            <div class="item-inner">
-              <p class="item-category"><a class="article-category-link" href="/categories/Hadoop/">Hadoop</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Hadoop/HDFS/">HDFS</a></p>
-              <p class="item-title"><a href="/2015/09/01/列式Parquet与行式Avro，对比Benchmarks性能测试/" class="title">列式Parquet与行式Avro，对比Benchmarks性能测试</a></p>
-              <p class="item-date"><time datetime="2015-08-31T16:40:09.000Z" itemprop="datePublished">2015-09-01</time></p>
-            </div>
-          </li>
-        
-          <li>
-            
-            <div class="item-thumbnail">
-              <a href="/2015/08/30/git常见问题备忘/" class="thumbnail">
-  
-    <span style="background-image:url(/images/github_logo.png)" alt="git常见问题备忘" class="thumbnail-image"></span>
-  
-</a>
-            </div>
-            
-            <div class="item-inner">
-              <p class="item-category"><a class="article-category-link" href="/categories/git/">git</a></p>
-              <p class="item-title"><a href="/2015/08/30/git常见问题备忘/" class="title">git常见问题备忘</a></p>
-              <p class="item-date"><time datetime="2015-08-30T07:15:46.000Z" itemprop="datePublished">2015-08-30</time></p>
-            </div>
-          </li>
-        
-          <li>
-            
-            <div class="item-thumbnail">
-              <a href="/2015/04/29/Java-基础（面试题）总结（分享-交流）/" class="thumbnail">
-  
-    <span style="background-image:url(/images/Java_Duke_learning.png)" alt="Java, 基础（面试题）总结（分享-交流）" class="thumbnail-image"></span>
-  
-</a>
-            </div>
-            
-            <div class="item-inner">
-              <p class="item-category"><a class="article-category-link" href="/categories/Java/">Java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Java/面试/">面试</a></p>
-              <p class="item-title"><a href="/2015/04/29/Java-基础（面试题）总结（分享-交流）/" class="title">Java, 基础（面试题）总结（分享-交流）</a></p>
-              <p class="item-date"><time datetime="2015-04-28T18:02:42.000Z" itemprop="datePublished">2015-04-29</time></p>
-            </div>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
+      <category term="Java" scheme="http://zyq001.github.io/tags/Java/"/>
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">分类</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hadoop/">Hadoop</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Hadoop/HDFS/">HDFS</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Hadoop/HDFS/存储格式/">存储格式</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Hadoop/HDFS/存储格式/Parquet/">Parquet</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/面试/">面试</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">1</span></li></ul>
-    </div>
-  </div>
-
-  
+      <category term="面试" scheme="http://zyq001.github.io/tags/%E9%9D%A2%E8%AF%95/"/>
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签云</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/HDFS/" style="font-size: 10px;">HDFS</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Spark/" style="font-size: 10px;">Spark</a> <a href="/tags/changes-not-staged/" style="font-size: 10px;">changes not staged</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/parquet/" style="font-size: 10px;">parquet</a> <a href="/tags/列式存储/" style="font-size: 10px;">列式存储</a> <a href="/tags/问题/" style="font-size: 10px;">问题</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
-    </div>
-  </div>
-
-  
+      <category term="Java" scheme="http://zyq001.github.io/categories/Java/"/>
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">八月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a><span class="archive-list-count">1</span></li></ul>
-    </div>
-  </div>
-
-  
-  <div id="toTop" class="fa fa-chevron-up"></div>
-</aside>
-      
-    </div>
-    <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2000 - 2015 Mk Zang<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
-    </div>
-  </div>
-</footer>
+      <category term="面试" scheme="http://zyq001.github.io/categories/Java/%E9%9D%A2%E8%AF%95/"/>
     
-
-<script type="text/javascript">
-  var duoshuoQuery = {short_name:"mk-zang"};
-  (function() {
-    var ds = document.createElement('script');
-    ds.type = 'text/javascript';ds.async = true;
-    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-    ds.charset = 'UTF-8';
-    (document.getElementsByTagName('head')[0] 
-     || document.getElementsByTagName('body')[0]).appendChild(ds);
-  })();
-</script>
-
-
-<script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
-
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
-  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
-
-
-<script src="/js/script.js" type="text/javascript"></script>
-
-  </div>
-</body>
-</html>
+  </entry>
+  
+</feed>
