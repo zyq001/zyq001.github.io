@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://zyq001.github.io/"/>
-  <updated>2015-09-02T15:13:34.574Z</updated>
+  <updated>2015-09-03T03:57:02.040Z</updated>
   <id>http://zyq001.github.io/</id>
   
   <author>
@@ -13,6 +13,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[SDN笔记]]></title>
+    <link href="http://zyq001.github.io/2015/09/03/SDN%E7%AC%94%E8%AE%B0/"/>
+    <id>http://zyq001.github.io/2015/09/03/SDN笔记/</id>
+    <published>2015-09-03T03:46:58.000Z</published>
+    <updated>2015-09-03T03:57:02.040Z</updated>
+    <content type="html"><![CDATA[<p>命令：<br>     <code>virsh net-list</code>  查看网桥</p>
+<p>札记：<br>ovs超过1.9 无法配合kvm libirt<br>ubuntu 14.04 apt-cache ovs默认版本2.02<br>ubuntu server 制作简单U盘系统版不可用 </p>
+<p>ovs-brcompatd is not running ？<br>安装ubuntu server<br><a id="more"></a><br>ubuntu server 安装<br>（事先把最后一个盘后面腾出空闲空间 ）<br>向导 使用最大连续空闲</p>
+<p>网页 乱码<br>apt-get install xfonts-wqy<br> 中文支持</p>
+<p>samba共享文件夹 只能共享一个 不能 共享多级</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>命令：<br>     <code>virsh net-list</code>  查看网桥</p>
+<p>札记：<br>ovs超过1.9 无法配合kvm libirt<br>ubuntu 14.04 apt-cache ovs默认版本2.02<br>ubuntu server 制作简单U盘系统版不可用 </p>
+<p>ovs-brcompatd is not running ？<br>安装ubuntu server<br>]]>
+    
+    </summary>
+    
+      <category term="SDN" scheme="http://zyq001.github.io/tags/SDN/"/>
+    
+      <category term="SDN" scheme="http://zyq001.github.io/categories/SDN/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[列式Parquet与行式Avro，对比Benchmarks性能测试]]></title>
@@ -99,6 +124,152 @@
       <category term="问题" scheme="http://zyq001.github.io/tags/%E9%97%AE%E9%A2%98/"/>
     
       <category term="git" scheme="http://zyq001.github.io/categories/git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[angularJS学习笔记]]></title>
+    <link href="http://zyq001.github.io/2015/07/10/angularJS%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    <id>http://zyq001.github.io/2015/07/10/angularJS学习笔记/</id>
+    <published>2015-07-10T02:52:37.000Z</published>
+    <updated>2015-09-03T03:57:35.511Z</updated>
+    <content type="html"><![CDATA[<p>AngularJS 通过 <strong>ng-directives</strong> 扩展了 HTML。</p>
+<ul>
+<li><strong>ng-app</strong> 指令定义一个 AngularJS 应用程序。  </li>
+</ul>
+<ul>
+<li><strong>ng-model</strong> 指令把元素值（比如输入域的值）绑定到应用程序。  </li>
+</ul>
+<ul>
+<li><strong>ng-bind</strong> 指令把应用程序数据绑定到 HTML 视图。  </li>
+</ul>
+<p>什么是 AngularJS？</p>
+<p>“AngularJS 是专门为<strong>应用程序</strong>设计的 HTML。”<br>AngularJS 使得开发现代的<strong>单一页面应用程序</strong>（SPAs：Single Page Applications）变得更加容易。<br>AngularJS 把应用程序<strong>数据绑定到 HTML 元素</strong>。<br>AngularJS 可以<strong>克隆和重复</strong> HTML 元素。<br>AngularJS 可以<strong>隐藏和显示</strong> HTML 元素。<br>AngularJS 可以在 HTML 元素”背后”<strong>添加代码</strong>。<br>AngularJS 支持<strong>输入验证</strong>。<br><a id="more"></a></p>
+<h3 id="ng-app_指令">ng-app 指令</h3><hr>
+<p>ng-app 指令定义了 AngularJS 应用程序的 <strong>根元素</strong>。<br>ng-app 指令在网页加载完毕时会自动引导（自动初始化）应用程序。    </p>
+<h3 id="ng-init_指令">ng-init 指令</h3><hr>
+<p>ng-init 指令为 AngularJS 应用程序定义了 <strong>初始值</strong>。<br>通常情况下，不使用 ng-init。您将使用一个控制器或模块来代替它。<br>稍后您将学习更多有关控制器和模块的知识。  </p>
+<h3 id="ng-model_指令">ng-model 指令</h3><hr>
+<p>ng-model 指令 绑定 HTML 元素 到应用<strong>程序数据</strong>。<br>ng-model 指令也可以：</p>
+<ul>
+<li><p>为应用程序数据提供类型<strong>验证</strong>（number、email、required）。</p>
+</li>
+<li><p>为应用程序数据提供状态（invalid、dirty、touched、error）。</p>
+</li>
+<li><p>为 HTML 元素提供 CSS 类。</p>
+</li>
+<li><p>绑定 HTML 元素到 HTML 表单。  </p>
+</li>
+</ul>
+<h3 id="ng-repeat_指令">ng-repeat 指令</h3><hr>
+<p>ng-repeat 指令对于集合中（数组中）的每个项会 <strong>克隆一次</strong> HTML 元素。  </p>
+<h2 id="AngularJS_控制器">AngularJS 控制器</h2><hr>
+<p>AngularJS 应用程序被控制器控制。<br><strong>ng-controller</strong> 指令定义了应用程序控制器。<br>控制器是 JavaScript 对象，由标准的 JavaScript 对象的构造函数 创建。<br>控制器的 <code>$scope</code> 是控制器所指向的应用程序 HTML 元素。  </p>
+<p>实例讲解：<br>AngularJS 应用程序由 ng-app 定义。应用程序在 <div> 内运行。<br>ng-controller 指令把控制器命名为 object。<br>函数 personController 是一个标准的 JavaScript 对象的构造函数。<br>控制器对象有一个属性：<code>$scope.person</code>。<br>person 对象有两个属性：firstName 和 lastName。<br>ng-model 指令绑定输入域到控制器的属性（firstName 和 lastName）。  </div></p>
+<p>上面的实例演示了一个带有 lastName 和 firstName 这两个属性的控制器对象。<br>控制器也可以把函数作为对象属性：  </p>
+<h3 id="控制器方法">控制器方法</h3><p>控制器也可以带有方法：  </p>
+<h3 id="AngularJS_过滤器">AngularJS 过滤器</h3><p>过滤器可以使用一个管道字符（|）添加到表达式和指令中。<br>AngularJS 过滤器  </p>
+<p>AngularJS 过滤器可用于<strong>转换数据</strong>：<br>过滤器  &#8195;    &#8195;描述<br>currency    格式化数字为货币格式。<br>filter    &#8195;从数组项中选择一个子集。<br>lowercase    格式化字符串为小写。<br>orderBy    &#8194;根据某个表达式排列数组。<br>uppercase    格式化字符串为大写。  </p>
+<ul>
+<li>向表达式添加过滤器</li>
+</ul>
+<p>过滤器可以通过一个管道字符（|）和一个过滤器添加到表达式中。<br>（下面的两个实例，我们将使用前面章节中提到的 person 控制器）<br>uppercase 过滤器格式化字符串为大写：</p>
+<p><strong>过滤输入</strong></p>
+<p>输入过滤器可以通过一个管道字符（|）和一个过滤器添加到指令中，该过滤器后跟一个冒号和一个模型名称。<br>filter 过滤器从数组中选择一个子集：  </p>
+<h3 id="AngularJS_XMLHttpRequest">AngularJS XMLHttpRequest</h3><p>$http 是 AngularJS 中的一个核心服务，用于读取远程服务器的数据。<br>AngularJS $http  </p>
+<p>AngularJS<code>$http</code> 是一个用于读取web服务器上数据的服务。<br><code>$http.get(url)</code>是用于读取服务器数据的函数。  </p>
+<h2 id="AngularJS_SQL">AngularJS SQL</h2><hr>
+<p>在前面章节中的代码也可以用于读取数据库中的数据<br>使用 PHP 从 MySQL 中获取数据</p>
+<p>PHP 读取 MySQL 数据代码  </p>
+<h3 id="AngularJS_HTML_DOM">AngularJS HTML DOM</h3><p>AngularJS 有自己的 HTML 属性指令。<br><strong>ng-disabled 指令</strong></p>
+<p>ng-disabled 指令直接绑定应用程序数据到 HTML 的 disabled 属性。</p>
+<p><strong>ng-show 指令</strong></p>
+<p>ng-show 指令<strong>隐藏或显示</strong>一个 HTML 元素。</p>
+<h2 id="AngularJS_HTML_事件">AngularJS HTML 事件</h2><hr>
+<p>AngularJS 有自己的 HTML 事件指令。<br><strong>ng-click</strong> 指令</p>
+<p>ng-click 指令定义了一个 AngularJS <strong>单击</strong>事件。</p>
+<ul>
+<li>隐藏 HTML 元素</li>
+</ul>
+<p><strong>ng-hide</strong>指令用于设置应用的一部分 不可见 。<br><code>ng-hide=&quot;true&quot;</code>让 HTML 元素 不可见。<br><code>ng-hide=&quot;false&quot;</code> 让元素可见。</p>
+<ul>
+<li>显示 HTML 元素</li>
+</ul>
+<p><strong>ng-show</strong> 指令可用于设置应用中的一部分可见 。<br><code>ng-show=&quot;false&quot;</code> 可以设置 HTML 元素 不可见。<br><code>ng-show=&quot;true&quot;</code> 可以以设置 HTML 元素可见。<br>以下实例使用了 ng-show 指令:</p>
+<h2 id="AngularJS_模块">AngularJS 模块</h2><hr>
+<p>模块定义了您的应用程序。<br>所有的控制器都应该属于一个模块。<br>模块保持全局命名空间中的整洁。<br>AngularJS 模块实例  </p>
+<p>在本实例中，”myApp.js” 包含了一个应用程序模块定义，”myCtrl.js” 包含了一个控制器：  </p>
+<p>使用一个由 模块 替代的控制器：  </p>
+<p>您的应用程序至少应该有一个模块文件，一个控制器文件。<br>首先，创建模块文件 “myApp.js”：  </p>
+<p>然后，创建控制器文件。本实例中是 “myCtrl.js”：  </p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>AngularJS 通过 <strong>ng-directives</strong> 扩展了 HTML。</p>
+<ul>
+<li><strong>ng-app</strong> 指令定义一个 AngularJS 应用程序。  </li>
+</ul>
+<ul>
+<li><strong>ng-model</strong> 指令把元素值（比如输入域的值）绑定到应用程序。  </li>
+</ul>
+<ul>
+<li><strong>ng-bind</strong> 指令把应用程序数据绑定到 HTML 视图。  </li>
+</ul>
+<p>什么是 AngularJS？</p>
+<p>“AngularJS 是专门为<strong>应用程序</strong>设计的 HTML。”<br>AngularJS 使得开发现代的<strong>单一页面应用程序</strong>（SPAs：Single Page Applications）变得更加容易。<br>AngularJS 把应用程序<strong>数据绑定到 HTML 元素</strong>。<br>AngularJS 可以<strong>克隆和重复</strong> HTML 元素。<br>AngularJS 可以<strong>隐藏和显示</strong> HTML 元素。<br>AngularJS 可以在 HTML 元素”背后”<strong>添加代码</strong>。<br>AngularJS 支持<strong>输入验证</strong>。<br>]]>
+    
+    </summary>
+    
+      <category term="Js" scheme="http://zyq001.github.io/tags/Js/"/>
+    
+      <category term="angular" scheme="http://zyq001.github.io/tags/angular/"/>
+    
+      <category term="Js" scheme="http://zyq001.github.io/categories/Js/"/>
+    
+      <category term="angular" scheme="http://zyq001.github.io/categories/Js/angular/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[【Maven】【gradle】java.io.IOException: No locks available常见解决方案]]></title>
+    <link href="http://zyq001.github.io/2015/05/03/%E3%80%90Maven%E3%80%91%E3%80%90gradle%E3%80%91java-io-IOException-No-locks-available%E5%B8%B8%E8%A7%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
+    <id>http://zyq001.github.io/2015/05/03/【Maven】【gradle】java-io-IOException-No-locks-available常见解决方案/</id>
+    <published>2015-05-03T01:55:02.000Z</published>
+    <updated>2015-09-03T02:41:12.714Z</updated>
+    <content type="html"><![CDATA[<p>thumbnail: /images/maven_tb.png<br>banner: /images/maven_bner.png</p>
+<pre><code>Java<span class="class">.io</span><span class="class">.IOException</span>: No locks available
+    at sun<span class="class">.nio</span><span class="class">.ch</span><span class="class">.FileChannelImpl</span><span class="class">.lock0</span>(Native Method)
+    at sun<span class="class">.nio</span><span class="class">.ch</span><span class="class">.FileChannelImpl</span><span class="class">.lock</span>(FileChannelImpl<span class="class">.java</span>:<span class="number">784</span>)
+    at java<span class="class">.nio</span><span class="class">.channels</span><span class="class">.FileChannel</span><span class="class">.lock</span>(FileChannel<span class="class">.java</span>:<span class="number">865</span>)
+</code></pre><p>能够下载依赖的jar包，但是每下载一次都会跑出<strong>No locks available</strong>异常，而且每个jar下载都需要等待很久。</p>
+<p>最后通过 df   -T   -h 命令才发现当前目录挂载的是NFS。<br><a id="more"></a><br>传送门：NFS介绍<br><a href="http://book.51cto.com/art/200808/85167.htm" target="_blank" rel="external">http://book.51cto.com/art/200808/85167.htm</a><br><a href="http://fedora.linuxsir.org/main/?q=node/41" target="_blank" rel="external">http://fedora.linuxsir.org/main/?q=node/41</a></p>
+<p>这一般是因为 /home/* , /global,以及常用的/diskN是独立的，为了方便在任何一台机器上都可以访问/home和/global,所以这两个目录做的非本地的（也就是NFS）</p>
+<p>Maven 和 gradle的默认本地仓库是home下的 如/home/userName/.gradle（或者.m2）</p>
+<p>网上搜到的解决方案<br>1、启用NFS filesystem lock服务<br>2、换个本地的filesystem<br><strong>实际上 </strong>   </p>
+<ol>
+<li>公司的开发机，一般用户是没有roo权限的，所以方法1不能实现    </li>
+<li>关于2,  以下是具体操作：<br>&#8195;&#8195; <strong>Maven：</strong><br>&#8195;&#8195;<strong>settings.xml</strong>文件中的： <code>&lt;localRepository&gt;/disk1/username/.m2/&lt;/localRepository&gt;</code>  设置到一个非NFS的Disk(本地, 如disk1，disk2，之类的)上。基本的maven 安装和配置网上有很多。  </li>
+</ol>
+<p>&#8195;&#8195;<strong>Gradle：</strong><br>&#8195;&#8195;1. 本地安装的Gradle 则修改   gradle目录下的 bin/gradle（Windows是bin/gradle.bat文件）<br><code>GRADLE_OPTS=-Dgradle.user.home=/disk1/userName/gradle#</code>添加这一行~<br>&#8195;&#8195;2. 项目自带的gradlew（如某些采用gradle构建的开源项目 LinkedIn Gobblin）则修改gradlew文件也是添加那一行</p>
+<p>参考：<br><a href="http://blog.csdn.net/liu251/article/details/7431696" target="_blank" rel="external">http://blog.csdn.net/liu251/article/details/7431696</a><br><a href="http://www.vicviz.com/gradle-in-action-bi-ji/" target="_blank" rel="external">http://www.vicviz.com/gradle-in-action-bi-ji/</a>  </p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>thumbnail: /images/maven_tb.png<br>banner: /images/maven_bner.png</p>
+<pre><code>Java<span class="class">.io</span><span class="class">.IOException</span>: No locks available
+    at sun<span class="class">.nio</span><span class="class">.ch</span><span class="class">.FileChannelImpl</span><span class="class">.lock0</span>(Native Method)
+    at sun<span class="class">.nio</span><span class="class">.ch</span><span class="class">.FileChannelImpl</span><span class="class">.lock</span>(FileChannelImpl<span class="class">.java</span>:<span class="number">784</span>)
+    at java<span class="class">.nio</span><span class="class">.channels</span><span class="class">.FileChannel</span><span class="class">.lock</span>(FileChannel<span class="class">.java</span>:<span class="number">865</span>)
+</code></pre><p>能够下载依赖的jar包，但是每下载一次都会跑出<strong>No locks available</strong>异常，而且每个jar下载都需要等待很久。</p>
+<p>最后通过 df   -T   -h 命令才发现当前目录挂载的是NFS。<br>]]>
+    
+    </summary>
+    
+      <category term="Maven" scheme="http://zyq001.github.io/tags/Maven/"/>
+    
+      <category term="gradle" scheme="http://zyq001.github.io/tags/gradle/"/>
+    
+      <category term="研发管理" scheme="http://zyq001.github.io/categories/%E7%A0%94%E5%8F%91%E7%AE%A1%E7%90%86/"/>
+    
+      <category term="maven/gradle" scheme="http://zyq001.github.io/categories/%E7%A0%94%E5%8F%91%E7%AE%A1%E7%90%86/maven-gradle/"/>
     
   </entry>
   
@@ -343,6 +514,93 @@ public</span><span class="keyword"> static</span> Singleton<span class="function
   </entry>
   
   <entry>
+    <title><![CDATA[【算法】求全排列 回溯 交换 DFS JAVA]]></title>
+    <link href="http://zyq001.github.io/2015/04/15/%E3%80%90%E7%AE%97%E6%B3%95%E3%80%91%E6%B1%82%E5%85%A8%E6%8E%92%E5%88%97-%E5%9B%9E%E6%BA%AF-%E4%BA%A4%E6%8D%A2-DFS-JAVA/"/>
+    <id>http://zyq001.github.io/2015/04/15/【算法】求全排列-回溯-交换-DFS-JAVA/</id>
+    <published>2015-04-15T01:54:43.000Z</published>
+    <updated>2015-09-03T02:40:38.108Z</updated>
+    <content type="html"><![CDATA[<p>思路简述：<br>一个全排列其实就是一条把数组无重复遍历一遍的DFS过程<br>思路一：<strong>简单回溯</strong>，  </p>
+<ol>
+<li>一个List存遍历路径，从第N个“结点”到第N+1个“结点”是只需要找一个未遍历的结点就行  </li>
+<li>一个关键点在于查找 下一个可遍历“结点”， 可以用SET辅助List存放已遍历结点，List中存遍历书序（文中方法未用SET，复杂度较高，但是可以在Leetcode上AC）；也可用一个数据结构完成：  LinkedHashMap，即可保存插入顺序，也可O(1)判断是否存在某元素。  </li>
+<li>回溯： 选中某一子“结点”递归下去之后，要回溯查找另一“子节点”，这就是回溯的过程，通过把某时刻路径中最后结点删除，添加下一“子节点”实现  <a id="more"></a>
+</li>
+</ol>
+<p>代码  </p>
+<pre><code>public <span class="built_in">List</span>&lt;<span class="built_in">List</span>&lt;Integer&gt;&gt; permute(<span class="built_in">int</span>[] <span class="built_in">num</span>) {
+
+    <span class="built_in">List</span>&lt;<span class="built_in">List</span>&lt;Integer&gt;&gt; res = <span class="keyword">new</span> LinkedList&lt;<span class="built_in">List</span>&lt;Integer&gt;&gt;();  
+    <span class="keyword">if</span>(<span class="built_in">num</span> == <span class="keyword">null</span> || <span class="built_in">num</span>.length &lt; <span class="number">1</span>) <span class="keyword">return</span> res;  
+    bt(res, <span class="keyword">new</span> ArrayList&lt;Integer&gt;(), <span class="number">0</span>, <span class="built_in">num</span>);  
+    <span class="keyword">return</span> res;  
+}  
+
+public <span class="keyword">void</span> bt(<span class="built_in">List</span>&lt;<span class="built_in">List</span>&lt;Integer&gt;&gt; res, <span class="keyword">final</span> <span class="built_in">List</span>&lt;Integer&gt; cur, <span class="built_in">int</span> now, <span class="built_in">int</span>[] <span class="built_in">num</span>){
+    <span class="built_in">int</span> length = <span class="built_in">num</span>.length;
+    <span class="keyword">if</span>(cur.size() &gt;= length) {
+        res.add(<span class="keyword">new</span> ArrayList&lt;Integer&gt;(){
+            {
+                addAll(cur);
+            }
+        });
+        <span class="keyword">return</span> ;
+    }
+    <span class="keyword">for</span>(<span class="built_in">int</span> i = now; i &lt; length || i % length &lt; now; i++){<span class="comment">//回溯</span>
+        <span class="keyword">if</span>(cur.contains(<span class="built_in">num</span>[i % length])) <span class="keyword">continue</span>;<span class="comment">//判断回溯的元素是否已加入当前组合中</span>
+        cur.add(<span class="built_in">num</span>[i % length]);
+        bt(res, cur, (i  + <span class="number">1</span>)% length, <span class="built_in">num</span>);
+        cur.remove(cur.size() - <span class="number">1</span>);
+    }
+}
+</code></pre><p><strong>思路二：</strong><br> 基于思路一，<strong>不需要辅助List存放遍历路径</strong>，<strong>原数组就是遍历路径</strong><br>每次寻找下一遍历结点的过程可以转化为，<strong>将后一结点交换到当前结点</strong>的过程<br>还原交换的过程就是回溯的过程  </p>
+<pre><code>public <span class="built_in">List</span>&lt;<span class="built_in">List</span>&lt;Integer&gt;&gt; permute(<span class="built_in">int</span>[] <span class="built_in">num</span>) {
+    <span class="built_in">List</span>&lt;<span class="built_in">List</span>&lt;Integer&gt;&gt; res = <span class="keyword">new</span> LinkedList&lt;<span class="built_in">List</span>&lt;Integer&gt;&gt;();
+    <span class="keyword">if</span>(<span class="built_in">num</span> == <span class="keyword">null</span> || <span class="built_in">num</span>.length &lt; <span class="number">1</span>) <span class="keyword">return</span> res;
+    bt(res, <span class="keyword">new</span> ArrayList&lt;Integer&gt;(), <span class="number">0</span>, <span class="built_in">num</span>);
+    <span class="keyword">return</span> res;
+}
+
+public <span class="keyword">void</span> bt(<span class="built_in">List</span>&lt;<span class="built_in">List</span>&lt;Integer&gt;&gt; res, <span class="keyword">final</span> <span class="built_in">List</span>&lt;Integer&gt; cur, <span class="built_in">int</span> now, <span class="keyword">final</span> <span class="built_in">int</span>[] <span class="built_in">num</span>){
+    <span class="built_in">int</span> length = <span class="built_in">num</span>.length;
+    <span class="keyword">if</span>(now &gt;= length) {
+        res.add(<span class="keyword">new</span> ArrayList&lt;Integer&gt;(){
+            {
+                <span class="keyword">for</span>(<span class="built_in">int</span> i: <span class="built_in">num</span>)
+                add(i);
+            }
+        });
+        <span class="keyword">return</span> ;
+    }
+    <span class="keyword">for</span>(<span class="built_in">int</span> i = now; i &lt; length; i++){
+        swap(<span class="built_in">num</span>, now, i);
+        bt(res, cur, now + <span class="number">1</span>, <span class="built_in">num</span>);
+        swap(<span class="built_in">num</span>, now, i);
+    }
+
+}
+
+public <span class="keyword">void</span> swap(<span class="built_in">int</span>[] nums, <span class="built_in">int</span> idx1, <span class="built_in">int</span> idx2){
+    <span class="built_in">int</span> temp = nums[idx1];
+    nums[idx1] = nums[idx2];
+    nums[idx2] = temp;
+}  
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<p>思路简述：<br>一个全排列其实就是一条把数组无重复遍历一遍的DFS过程<br>思路一：<strong>简单回溯</strong>，  </p>
+<ol>
+<li>一个List存遍历路径，从第N个“结点”到第N+1个“结点”是只需要找一个未遍历的结点就行  </li>
+<li>一个关键点在于查找 下一个可遍历“结点”， 可以用SET辅助List存放已遍历结点，List中存遍历书序（文中方法未用SET，复杂度较高，但是可以在Leetcode上AC）；也可用一个数据结构完成：  LinkedHashMap，即可保存插入顺序，也可O(1)判断是否存在某元素。  </li>
+<li>回溯： 选中某一子“结点”递归下去之后，要回溯查找另一“子节点”，这就是回溯的过程，通过把某时刻路径中最后结点删除，添加下一“子节点”实现]]>
+    
+    </summary>
+    
+      <category term="算法， Java" scheme="http://zyq001.github.io/tags/%E7%AE%97%E6%B3%95%EF%BC%8C-Java/"/>
+    
+      <category term="算法" scheme="http://zyq001.github.io/categories/%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[笔记-数据库索引原理]]></title>
     <link href="http://zyq001.github.io/2015/03/15/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B4%A2%E5%BC%95%E5%8E%9F%E7%90%86/"/>
     <id>http://zyq001.github.io/2015/03/15/数据库索引原理/</id>
@@ -580,6 +838,174 @@ public</span><span class="keyword"> static</span> Singleton<span class="function
       <category term="Java" scheme="http://zyq001.github.io/tags/Java/"/>
     
       <category term="Java" scheme="http://zyq001.github.io/categories/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[svn常用概念总结]]></title>
+    <link href="http://zyq001.github.io/2014/09/03/svn%E5%B8%B8%E7%94%A8%E6%A6%82%E5%BF%B5%E6%80%BB%E7%BB%93/"/>
+    <id>http://zyq001.github.io/2014/09/03/svn常用概念总结/</id>
+    <published>2014-09-03T01:55:40.000Z</published>
+    <updated>2015-09-03T02:42:12.002Z</updated>
+    <content type="html"><![CDATA[<p>原理是这样的 svn服务器一般放在公共的服务器上，大家连这个服务器，在Eclipse上使用svn控件 可以下载svn上的项目至本地，所以很多公司将开发要用到的软件都放在svn上，有同事来只要连上svn 就可以把需要的东西下下来了</p>
+<ul>
+<li><strong>更新</strong>是指 服务器上变动了的 而你本地没有变动，需要你更新， update更新</li>
+</ul>
+<ul>
+<li><strong>提交</strong>是指 服务器上没有的，也就是你改过的东西，你需要将代码提交，其他同事更新你的代码 commit 提交</li>
+</ul>
+<p>同步，是在更新提交之前做的工作，更新提交前先同步，可以知道哪些东西要提交哪些东西要更新，哪些东西是冲突的（你和同事 改了同一个文件，可能会出现冲突），出现冲突不能提交也不能更新，只有先将冲突的文件选择用本地的文件覆盖或用服务器的文件覆盖本地后才能更新或提交，具体的用法还需要楼主多实践，这东西用过一次就会了 上面术语在MyEclipse里的选项是  </p>
+<ol>
+<li><strong>同步：</strong>synchronize with repository (如果你的项目连了svn 右键你的项目 team…就能看到) 点击同步后会进入到synchronize 的界面 再右键项目就有  </li>
+</ol>
+<ol>
+<li><strong>Mark as mergerd</strong> （冲突时点它 冲突的文件会用本地的覆盖服务器的，意思就是说 用你的！）   </li>
+<li><strong>override and update</strong> (冲突时 右键文件 选此项表示 用服务器的！)</li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>原理是这样的 svn服务器一般放在公共的服务器上，大家连这个服务器，在Eclipse上使用svn控件 可以下载svn上的项目至本地，所以很多公司将开发要用到的软件都放在svn上，有同事来只要连上svn 就可以把需要的东西下下来了</p>
+<ul>
+<li><strong>更]]>
+    </summary>
+    
+      <category term="svn" scheme="http://zyq001.github.io/tags/svn/"/>
+    
+      <category term="研发管理" scheme="http://zyq001.github.io/tags/%E7%A0%94%E5%8F%91%E7%AE%A1%E7%90%86/"/>
+    
+      <category term="研发管理" scheme="http://zyq001.github.io/categories/%E7%A0%94%E5%8F%91%E7%AE%A1%E7%90%86/"/>
+    
+      <category term="svn" scheme="http://zyq001.github.io/categories/%E7%A0%94%E5%8F%91%E7%AE%A1%E7%90%86/svn/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Linux(CentOS) Wget安装配置 [用户] Oracle JDK]]></title>
+    <link href="http://zyq001.github.io/2014/08/15/Linux-CentOS-Wget%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E7%94%A8%E6%88%B7Oracle-JDK/"/>
+    <id>http://zyq001.github.io/2014/08/15/Linux-CentOS-Wget安装配置用户Oracle-JDK/</id>
+    <published>2014-08-15T01:55:56.000Z</published>
+    <updated>2015-09-03T02:33:57.003Z</updated>
+    <content type="html"><![CDATA[<p>背景：<br>开发机上的系统JDK是1.6的，由于项目需要1.7，故决定下载一个jdk7，并配置到用户环境变量中；<br>尝试直接用wget从官网上下，结果下来都是一个几k的文件，应该是oracle上的防盗链，也就是用图形界面要先点accept；<br>用本地Windows下载好之后通过rz传上去，结果最近网络有点问题，很慢，还经常一半停下来，，</p>
+<p>网上搜了一下<br>  基于wget重定向，可以带一些cookie欺骗orcle，<br>  一般都说的加上  </p>
+<p>  <code>--no-cookie --header &quot;Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F&quot;</code><br><a id="more"></a><br>如果出现Unable to establish SSL connection的话，在wget后面加上–no-check-certificate即可，即：  </p>
+<p>  <code>wget --no-cookie --no-check-certificate --header &quot;Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F&quot;</code>  </p>
+<p>而经过测试，起码在我们这边是行不通的，跟不加一样，<br>  后来看到这篇文章：<a href="https://ivan-site.com/2012/05/download-oracle-java-jre-jdk-using-a-script/解决问题。" target="_blank" rel="external">https://ivan-site.com/2012/05/download-oracle-java-jre-jdk-using-a-script/解决问题。</a><br>   完整命令为：  </p>
+<pre><code>wget --<span class="keyword">no</span>-cookies --<span class="keyword">no</span>-check-certificate --header <span class="string">"Cookie: gpw_e24=http<span class="variable">%3A</span><span class="variable">%2F</span><span class="variable">%2Fwww</span>.oracle.com<span class="variable">%2F</span>; oraclelicense=accept-securebackup-cookie"</span> <span class="string">"http://download.oracle.com/otn-pub/java/jdk/7u4-b20/jdk-7u4-linux-x64.tar.gz"</span>  
+</code></pre><p>下载完之后</p>
+<pre><code>tar -zxvf *<span class="class">.tar</span><span class="class">.gz</span>
+</code></pre><p>然后  </p>
+<pre><code>vi ~/<span class="class">.profile</span>  
+</code></pre><p>添加如下  </p>
+<pre><code>export JAVA_HOME=/你的路径/jdk1.<span class="number">7.0_79</span>export CLASSPATH=<span class="variable">$JAVE</span>_HOME/lib/export PATH=<span class="variable">$JAVA</span>_HOME/bin/:<span class="variable">$PATH</span>  
+</code></pre><p><strong>注意吧$JAVA_HOME/bin/写在前面，不然java -version还是先找到系统的java  </strong><br>然后<br>    <code>source ~/.profile</code>    </p>
+<p>可以换成想要的版本，贴一些：<br>JDK 8u25</p>
+<ul>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/8u25-b17/jdk-8u25-linux-i586.rpm" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/8u25-b17/jdk-8u25-linux-i586.rpm</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/8u25-b17/jdk-8u25-linux-i586.tar.gz" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/8u25-b17/jdk-8u25-linux-i586.tar.gz</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/8u25-b17/jdk-8u25-linux-x64.rpm" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/8u25-b17/jdk-8u25-linux-x64.rpm</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/8u25-b17/jdk-8u25-linux-x64.tar.gz" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/8u25-b17/jdk-8u25-linux-x64.tar.gz</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/8u25-b17/jdk-8u25-macosx-x64.dmg" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/8u25-b17/jdk-8u25-macosx-x64.dmg</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/8u25-b17/jdk-8u25-solaris-sparcv9.tar.Z" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/8u25-b17/jdk-8u25-solaris-sparcv9.tar.Z</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/8u25-b17/jdk-8u25-solaris-sparcv9.tar.gz" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/8u25-b17/jdk-8u25-solaris-sparcv9.tar.gz</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/8u25-b17/jdk-8u25-solaris-x64.tar.Z" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/8u25-b17/jdk-8u25-solaris-x64.tar.Z</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/8u25-b17/jdk-8u25-solaris-x64.tar.gz" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/8u25-b17/jdk-8u25-solaris-x64.tar.gz</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/8u25-b18/jdk-8u25-windows-i586.exe" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/8u25-b18/jdk-8u25-windows-i586.exe</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/8u25-b18/jdk-8u25-windows-x64.exe" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/8u25-b18/jdk-8u25-windows-x64.exe</a>  </li>
+</ul>
+<p>JDK 7u72</p>
+<ul>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jdk-7u72-linux-i586.rpm" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jdk-7u72-linux-i586.rpm</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jdk-7u72-linux-i586.tar.gz" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jdk-7u72-linux-i586.tar.gz</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jdk-7u72-linux-x64.rpm" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jdk-7u72-linux-x64.rpm</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jdk-7u72-linux-x64.tar.gz" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jdk-7u72-linux-x64.tar.gz</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jdk-7u72-macosx-x64.dmg" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jdk-7u72-macosx-x64.dmg</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jdk-7u72-solaris-i586.tar.Z" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jdk-7u72-solaris-i586.tar.Z</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jdk-7u72-solaris-i586.tar.gz" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jdk-7u72-solaris-i586.tar.gz</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jdk-7u72-solaris-x64.tar.Z" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jdk-7u72-solaris-x64.tar.Z</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jdk-7u72-solaris-x64.tar.gz" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jdk-7u72-solaris-x64.tar.gz</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jdk-7u72-solaris-sparc.tar.Z" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jdk-7u72-solaris-sparc.tar.Z</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jdk-7u72-solaris-sparc.tar.gz" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jdk-7u72-solaris-sparc.tar.gz</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jdk-7u72-solaris-sparcv9.tar.Z" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jdk-7u72-solaris-sparcv9.tar.Z</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jdk-7u72-solaris-sparcv9.tar.gz" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jdk-7u72-solaris-sparcv9.tar.gz</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jdk-7u72-windows-i586.exe" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jdk-7u72-windows-i586.exe</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jdk-7u72-windows-x64.exe" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jdk-7u72-windows-x64.exe</a>  </li>
+</ul>
+<p>JRE 8u25</p>
+<ul>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/8u25-b17/jre-8u25-linux-i586.rpm" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/8u25-b17/jre-8u25-linux-i586.rpm</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/8u25-b17/jre-8u25-linux-i586.tar.gz" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/8u25-b17/jre-8u25-linux-i586.tar.gz</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/8u25-b17/jre-8u25-linux-x64.rpm" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/8u25-b17/jre-8u25-linux-x64.rpm</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/8u25-b17/jre-8u25-linux-x64.tar.gz" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/8u25-b17/jre-8u25-linux-x64.tar.gz</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/8u25-b17/jre-8u25-macosx-x64.dmg" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/8u25-b17/jre-8u25-macosx-x64.dmg</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/8u25-b17/jre-8u25-macosx-x64.tar.gz" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/8u25-b17/jre-8u25-macosx-x64.tar.gz</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/8u25-b17/jre-8u25-solaris-sparcv9.tar.gz" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/8u25-b17/jre-8u25-solaris-sparcv9.tar.gz</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/8u25-b17/jre-8u25-solaris-x64.tar.gz" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/8u25-b17/jre-8u25-solaris-x64.tar.gz</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/8u25-b18/jre-8u25-windows-i586-iftw.exe" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/8u25-b18/jre-8u25-windows-i586-iftw.exe</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/8u25-b18/jre-8u25-windows-i586.exe" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/8u25-b18/jre-8u25-windows-i586.exe</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/8u25-b18/jre-8u25-windows-i586.tar.gz" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/8u25-b18/jre-8u25-windows-i586.tar.gz</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/8u25-b18/jre-8u25-windows-x64.exe" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/8u25-b18/jre-8u25-windows-x64.exe</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/8u25-b18/jre-8u25-windows-x64.tar.gz" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/8u25-b18/jre-8u25-windows-x64.tar.gz</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/8u25-b17/server-jre-8u25-linux-x64.tar.gz" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/8u25-b17/server-jre-8u25-linux-x64.tar.gz</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/8u25-b17/server-jre-8u25-solaris-sparcv9.tar.gz" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/8u25-b17/server-jre-8u25-solaris-sparcv9.tar.gz</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/8u25-b17/server-jre-8u25-solaris-x64.tar.gz" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/8u25-b17/server-jre-8u25-solaris-x64.tar.gz</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/8u25-b18/server-jre-8u25-windows-x64.tar.gz" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/8u25-b18/server-jre-8u25-windows-x64.tar.gz</a>  </li>
+</ul>
+<p>JRE 7u72</p>
+<ul>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jre-7u72-linux-i586.rpm" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jre-7u72-linux-i586.rpm</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jre-7u72-linux-i586.tar.gz" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jre-7u72-linux-i586.tar.gz</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jre-7u72-linux-x64.rpm" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jre-7u72-linux-x64.rpm</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jre-7u72-linux-x64.tar.gz" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jre-7u72-linux-x64.tar.gz</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jre-7u72-macosx-x64.dmg" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jre-7u72-macosx-x64.dmg</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jre-7u72-macosx-x64.tar.gz" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jre-7u72-macosx-x64.tar.gz</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jre-7u72-solaris-i586.tar.gz" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jre-7u72-solaris-i586.tar.gz</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jre-7u72-solaris-x64.tar.gz" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jre-7u72-solaris-x64.tar.gz</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jre-7u72-solaris-sparc.tar.gz" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jre-7u72-solaris-sparc.tar.gz</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jre-7u72-solaris-sparcv9.tar.gz" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jre-7u72-solaris-sparcv9.tar.gz</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jre-7u72-windows-i586-iftw.exe" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jre-7u72-windows-i586-iftw.exe</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jre-7u72-windows-i586.exe" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jre-7u72-windows-i586.exe</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jre-7u72-windows-i586.tar.gz" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jre-7u72-windows-i586.tar.gz</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jre-7u72-windows-x64.exe" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jre-7u72-windows-x64.exe</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jre-7u72-windows-x64.tar.gz" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jre-7u72-windows-x64.tar.gz</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/7u72-b14/server-jre-7u72-linux-x64.tar.gz" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/7u72-b14/server-jre-7u72-linux-x64.tar.gz</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/7u72-b14/server-jre-7u72-solaris-i586.tar.gz" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/7u72-b14/server-jre-7u72-solaris-i586.tar.gz</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/7u72-b14/server-jre-7u72-solaris-sparc.tar.gz" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/7u72-b14/server-jre-7u72-solaris-sparc.tar.gz</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/7u72-b14/server-jre-7u72-solaris-sparcv9.tar.gz" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/7u72-b14/server-jre-7u72-solaris-sparcv9.tar.gz</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/7u72-b14/server-jre-7u72-solaris-x64.tar.gz" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/7u72-b14/server-jre-7u72-solaris-x64.tar.gz</a></li>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/7u72-b14/server-jre-7u72-windows-x64.tar.gz" target="_blank" rel="external">http://download.oracle.com/otn-pub/java/jdk/7u72-b14/server-jre-7u72-windows-x64.tar.gz</a></li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>背景：<br>开发机上的系统JDK是1.6的，由于项目需要1.7，故决定下载一个jdk7，并配置到用户环境变量中；<br>尝试直接用wget从官网上下，结果下来都是一个几k的文件，应该是oracle上的防盗链，也就是用图形界面要先点accept；<br>用本地Windows下载好之后通过rz传上去，结果最近网络有点问题，很慢，还经常一半停下来，，</p>
+<p>网上搜了一下<br>  基于wget重定向，可以带一些cookie欺骗orcle，<br>  一般都说的加上  </p>
+<p>  <code>--no-cookie --header &quot;Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F&quot;</code><br>]]>
+    
+    </summary>
+    
+      <category term="Linux" scheme="http://zyq001.github.io/tags/Linux/"/>
+    
+      <category term="Linux" scheme="http://zyq001.github.io/categories/Linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Java 泛型参数 向上转型]]></title>
+    <link href="http://zyq001.github.io/2014/06/03/Java-%E6%B3%9B%E5%9E%8B%E5%8F%82%E6%95%B0-%E5%90%91%E4%B8%8A%E8%BD%AC%E5%9E%8B/"/>
+    <id>http://zyq001.github.io/2014/06/03/Java-泛型参数-向上转型/</id>
+    <published>2014-06-03T01:54:27.000Z</published>
+    <updated>2015-09-03T02:26:04.491Z</updated>
+    <content type="html"><![CDATA[<p>根据现在的了解，java泛型默认是不支持向上转型的，但是可以通过<strong>泛型参数</strong>实现<strong>向上转型</strong></p>
+<p><code>List&lt;List&lt;Integer&gt;&gt; re = new ArrayList&lt;ArrayList&lt;Integer&gt;&gt;();</code>//这样编译通过 类型不匹配，无法转型</p>
+<p><code>List&lt;? extends List&lt;Integer&gt;&gt; re = new ArrayList&lt;ArrayList&lt;Integer&gt;&gt;();</code>//但是这样就可以，因为添加了泛型参数，任何继承List的类都没有问题</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>根据现在的了解，java泛型默认是不支持向上转型的，但是可以通过<strong>泛型参数</strong>实现<strong>向上转型</strong></p>
+<p><code>List&lt;List&lt;Integer&gt;&gt; re = new ArrayL]]>
+    </summary>
+    
+      <category term="Java" scheme="http://zyq001.github.io/tags/Java/"/>
+    
+      <category term="算法" scheme="http://zyq001.github.io/categories/%E7%AE%97%E6%B3%95/"/>
     
   </entry>
   
