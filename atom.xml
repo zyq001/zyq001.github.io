@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://zyq001.github.io/"/>
-  <updated>2015-09-04T15:58:30.453Z</updated>
+  <updated>2015-09-04T15:59:31.114Z</updated>
   <id>http://zyq001.github.io/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://zyq001.github.io/2015/09/04/Java-Coding-%E5%B0%8F%E6%8A%80%E5%B7%A7/"/>
     <id>http://zyq001.github.io/2015/09/04/Java-Coding-小技巧/</id>
     <published>2015-09-04T15:31:49.000Z</published>
-    <updated>2015-09-04T15:58:30.453Z</updated>
+    <updated>2015-09-04T15:59:31.114Z</updated>
     <content type="html"><![CDATA[<ol>
 <li>如何打印数组不用for–println without foreach  </li>
 </ol>
