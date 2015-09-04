@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Archives: 2014/6 | Mk Zang</title>
+  <title>Mk Zang</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Mk Zang&apos; blog">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Mk Zang">
-<meta property="og:url" content="http://zyq001.github.io/archives/2014/06/index.html">
+<meta property="og:url" content="http://zyq001.github.io/page/3/index.html">
 <meta property="og:site_name" content="Mk Zang">
 <meta property="og:description" content="Mk Zang&apos; blog">
 <meta name="twitter:card" content="summary">
@@ -121,48 +121,67 @@
 
       
       <section id="main">
-      <div class="archive-year-wrap">
-        <a href="/archives/2014" class="archive-year">2014</a>
-      </div>
-      <section class="archives-wrap">
-        <div class="archives">
+      <article id="post-Java-泛型参数-向上转型" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
     
-    <div class="archive-article-thumbnail">
-      <a href="/2014/06/03/Java-泛型参数-向上转型/" class="thumbnail">
-  
-    <span class="thumbnail-image thumbnail-none"></span>
-  
-</a>
-    </div>
     
-    <header class="archive-article-header">
-      
+      <header class="article-header">
+        
   
     <h1 itemprop="name">
-      <a class="archive-article-title" href="/2014/06/03/Java-泛型参数-向上转型/">Java 泛型参数 向上转型</a>
+      <a class="article-title" href="/2014/06/03/Java-泛型参数-向上转型/">Java 泛型参数 向上转型</a>
     </h1>
   
 
-      
-        
-  <div class="archive-article-date">
+        <div class="article-meta">
+          
+  <div class="article-date">
     <i class="fa fa-calendar"></i>
     <a href="/2014/06/03/Java-泛型参数-向上转型/">
-      <time datetime="2014-06-03T01:54:27.000Z" itemprop="datePublished">6月 3</time>
+      <time datetime="2014-06-03T01:54:27.000Z" itemprop="datePublished">2014-06-03</time>
     </a>
   </div>
 
 
-      
-    </header>
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/算法/">算法</a>
   </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <p>根据现在的了解，java泛型默认是不支持向上转型的，但是可以通过<strong>泛型参数</strong>实现<strong>向上转型</strong></p>
+<p><code>List&lt;List&lt;Integer&gt;&gt; re = new ArrayList&lt;ArrayList&lt;Integer&gt;&gt;();</code>//这样编译通过 类型不匹配，无法转型</p>
+<p><code>List&lt;? extends List&lt;Integer&gt;&gt; re = new ArrayList&lt;ArrayList&lt;Integer&gt;&gt;();</code>//但是这样就可以，因为添加了泛型参数，任何继承List的类都没有问题</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zyq001.github.io/2014/06/03/Java-泛型参数-向上转型/" data-id="cie5ttrez002mb0ot8vracqst" class="article-share-link">分享到</a>
+      
+        <a href="http://zyq001.github.io/2014/06/03/Java-泛型参数-向上转型/#ds-thread" class="article-comment-link">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+
+    </footer>
+  </div>
+  
 </article>
-  
-    </div></section>
-  
+
+
+
+    
+      <nav id="page-nav">
+        <a class="extend prev" rel="prev" href="/page/2/">&laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+      </nav>
+    
 
 
 </section>

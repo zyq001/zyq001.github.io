@@ -3,17 +3,30 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Archives: 2014/6 | Mk Zang</title>
+  <title>Coding 小技巧 | Mk Zang</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Mk Zang&apos; blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Mk Zang">
-<meta property="og:url" content="http://zyq001.github.io/archives/2014/06/index.html">
+  <meta name="description" content="如何打印数组不用for–println without foreach  
+
+就算debug用的再6，写代码中不可避免地要打印一些东西，高级语言横行的时代，Java数组打印居然还要自己foreach，不过还好各种容器类如List重写了toString函数，可以直接打印，那么问题就简单了，把数组转换成List。而且查阅源码，发现
+
+Arrays.asList(T... a)其实是new了一个Arra">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Coding 小技巧">
+<meta property="og:url" content="http://zyq001.github.io/2015/09/04/Java-Coding-小技巧/index.html">
 <meta property="og:site_name" content="Mk Zang">
-<meta property="og:description" content="Mk Zang&apos; blog">
+<meta property="og:description" content="如何打印数组不用for–println without foreach  
+
+就算debug用的再6，写代码中不可避免地要打印一些东西，高级语言横行的时代，Java数组打印居然还要自己foreach，不过还好各种容器类如List重写了toString函数，可以直接打印，那么问题就简单了，把数组转换成List。而且查阅源码，发现
+
+Arrays.asList(T... a)其实是new了一个Arra">
+<meta property="og:updated_time" content="2015-09-04T15:58:30.453Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mk Zang">
-<meta name="twitter:description" content="Mk Zang&apos; blog">
+<meta name="twitter:title" content="Coding 小技巧">
+<meta name="twitter:description" content="如何打印数组不用for–println without foreach  
+
+就算debug用的再6，写代码中不可避免地要打印一些东西，高级语言横行的时代，Java数组打印居然还要自己foreach，不过还好各种容器类如List重写了toString函数，可以直接打印，那么问题就简单了，把数组转换成List。而且查阅源码，发现
+
+Arrays.asList(T... a)其实是new了一个Arra">
   
   
     <link rel="icon" href="images/favicon.png">
@@ -120,50 +133,92 @@
 </aside>
 
       
-      <section id="main">
-      <div class="archive-year-wrap">
-        <a href="/archives/2014" class="archive-year">2014</a>
-      </div>
-      <section class="archives-wrap">
-        <div class="archives">
+      <section id="main"><article id="post-Java-Coding-小技巧" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    
-    <div class="archive-article-thumbnail">
-      <a href="/2014/06/03/Java-泛型参数-向上转型/" class="thumbnail">
-  
-    <span class="thumbnail-image thumbnail-none"></span>
-  
-</a>
-    </div>
-    
-    <header class="archive-article-header">
       
+	
+		<img src="/images/Tips.jpg" class="article-banner">
+	
+
+
+
+    
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2014/06/03/Java-泛型参数-向上转型/">Java 泛型参数 向上转型</a>
+    <h1 class="article-title" itemprop="name">
+      Coding 小技巧
     </h1>
   
 
-      
-        
-  <div class="archive-article-date">
+        <div class="article-meta">
+          
+  <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2014/06/03/Java-泛型参数-向上转型/">
-      <time datetime="2014-06-03T01:54:27.000Z" itemprop="datePublished">6月 3</time>
+    <a href="/2015/09/04/Java-Coding-小技巧/">
+      <time datetime="2015-09-04T15:31:49.000Z" itemprop="datePublished">2015-09-04</time>
     </a>
   </div>
 
 
-      
-    </header>
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/tips/">tips</a>
   </div>
-</article>
-  
-    </div></section>
-  
 
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <ol>
+<li>如何打印数组不用for–println without foreach  </li>
+</ol>
+<p>就算debug用的再6，写代码中不可避免地要打印一些东西，高级语言横行的时代，Java数组打印居然还要自己foreach，不过还好各种容器类如List重写了toString函数，可以直接打印，那么问题就简单了，把数组转换成List。而且查阅源码，发现</p>
+<ul>
+<li><code>Arrays.asList(T... a)</code>其实是new了一个ArrayList，而且直接把数组的指针赋值过去的，没有多余地进行ArrayCopy。不过既然是模板，那么基本类型的数组是没法用的，，  </li>
+<li><code>Arrays.toString(各种类型包括Object[])</code>后来发现这个，这个重载了好多，不仅支持Object数组，还支持各种基本类型数组，那就直接拿来用吧！<br><strong>总结:</strong><br>如果是基本类型，如int[] arr,这样打：<code>System.out.println(Arrays.toString(arr));</code><br>如果是String[]或者其他Object[] arr,这样打：<code>System.out.println(Arrays.asList(arr));</code> </li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zyq001.github.io/2015/09/04/Java-Coding-小技巧/" data-id="cie5ttrbf0000b0otqv75237x" class="article-share-link">分享到</a>
+      
+        <a href="http://zyq001.github.io/2015/09/04/Java-Coding-小技巧/#ds-thread" class="article-comment-link">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tips/">tips</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/09/01/列式Apache Parquet与行式Avro，对比Benchmarks性能分析/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">列式Parquet与行式Avro，对比Benchmarks性能分析</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="http://zyq001.github.io/2015/09/04/Java-Coding-小技巧/" data-title="Coding 小技巧" data-url="http://zyq001.github.io/2015/09/04/Java-Coding-小技巧/">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by DuoShuo.</a></noscript>
+      </div>
+  </section>
 
 </section>
       
