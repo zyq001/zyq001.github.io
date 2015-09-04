@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://zyq001.github.io/"/>
-  <updated>2015-09-03T16:22:39.898Z</updated>
+  <updated>2015-09-04T19:13:43.239Z</updated>
   <id>http://zyq001.github.io/</id>
   
   <author>
@@ -15,11 +15,93 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[Linkedin/Gobblin架构与源码学习-从Kafa-Hdfs的case study开始]]></title>
+    <link href="http://zyq001.github.io/2015/09/02/Linkedin-Gobblin%E6%9E%B6%E6%9E%84%E4%B8%8E%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-%E4%BB%8EKafa-Hdfs%E7%9A%84case-study%E5%BC%80%E5%A7%8B/"/>
+    <id>http://zyq001.github.io/2015/09/02/Linkedin-Gobblin架构与源码学习-从Kafa-Hdfs的case-study开始/</id>
+    <published>2015-09-01T17:02:44.000Z</published>
+    <updated>2015-09-04T19:13:43.239Z</updated>
+    <content type="html"><![CDATA[<p>Gobblin是Linkedin内部用来整合各种数据源（关系型数据库，kafka，FTP/SFTP servers等等）通用ETL框架，于14年开源（<a href="https://github.com/linkedin/gobblin" target="_blank" rel="external">地址</a>）。用本人低俗的理解，画了一张很大的饼，各种数据都可以在这里“一站式”解决ETL整个过程（据说他们内部也是这么干的），专为大数据而生。</p>
+<p>在某道公司实习的时候参与到一个实时统计系统的优化，之前日志数据从Kafka到Hdfs的落地用的是<a href="https://github.com/linkedin/camus" target="_blank" rel="external">Linkedin/camus</a>,但据说作者不想写了（也有人说写到太烂了，，），现在已经停止开发，借助Hdfs上由Avro改Parquet列式存储的机会，把camus替换成了Gobblin，花了一段时间了解Gobblin。  </p>
+<p>论文的阅读理解和整体架构稍后再写吧，这次先借助官方Wiki的Kafka-Hdfs case study，从自己接触最多的部分开始介绍吧。  </p>
+<p>作为一个通用框架，Gobblin的接口封装和概念抽象做的很好，作为一个ETL框架使用者，基本地，我们只需要实现我们自己的<strong>Source</strong>，<strong>Extractor</strong>，<strong>Conventer</strong>类，再加上一些源-目的地址之类的通过配置文件提交给Gobblin就行了，当然Gobblin已经为我们实现了很多类，可以直接拿来用，比如针对Kafka的KafkaExtractor,KafkaSource,KafkaAvroSource(肯定少不了为Avro定制的东西，，)。不过Gobblin强大的地方还在于，还可以让用户定制更多的东西，比如QualitlyChecker,Writer,Publisher等，还支持Compaction去重和小文件的merge。</p>
+<h2 id="流程">流程</h2><hr>
+<p>下面结合Gobblin文章中的流程图和源码中提供的Kafka-Hdfs的基础类，先分析下整体流程<br><a href="/images/linkedin-gobblin-scalable-ingestion-flow.png">官方流图</a></p>
+<ol>
+<li>配置文件指定我们的Source，Writer等类，和地址等，配置文件后缀名必须是.job或者.pull  </li>
+<li>脚本启动，可以选Standalone和MR两种模式，通过参数或者环境变量指定一些工作目录详见[Wiki/Deployment]</li>
+<li>gobblin-runtime包下的JobLauncher读取配置文件，将配置文件抽象成一种SourceState结构，</li>
+<li><p>将SourceStare交给我们的KafaSource。Source类要做的跟数据源取得联系，比如初始化一些metadata元数据等，并生成WorkUnit（这个概念是为了迎合Yarn中Container的概念，并且可以指定配置一些策略如通过指定mapper数量修改对应关系，默认一个WorkUnit一个mapper，），然后把WorkUnit交给Extractor, gobblin-core包下自带的关于kafka的类见下图：<br><a href="/images/kafka.png">kafka</a><br>这里必须提一下KafkaWraper，这里封装了各种跟kafka打交道的api，不过截至目前都是用的old api，新api的接口函数以及有了，但是没有实现，调用会直接throw异常。</p>
+</li>
+<li><p>Extractor负责实现从数据源中读数据。</p>
+</li>
+<li>后面就是经过Converter和qualityChecker对数据做一些转换和校验，然后根据配置文件指定，选择writer写入本地文件或者HDFS，gobblin-core提供simple、Avro和fs三类writer，详见下图并针对Hdfs提供可根据时间切割文件的类。<br><a href="/images/writer.png">writer</a></li>
+</ol>
+<h2 id="接口">接口</h2><hr>
+<ol>
+<li><p><strong>Source</strong>类需要实现两个函数：  getWorkUnits,和getExtractor</p>
+<p> <code>public List&lt;WorkUnit&gt; getWorkunits(SourceState state){}</code><br>根据解析出来的配置文件生成WorkUnit，这个在KafkaSource类中实现，但是KafkaSource还是抽象类，core包自带两个实现类，KafkaAvroSource和KafkaSimpleSource类</p>
+<p> public Extractor<schema, genericrecord=""> getExtractor(WorkUnitState state) throws IOException {<br> return new KafkaAvroExtractor(state);<br>   }<br>KafkaAvroSource类就是产生一个Extractor，WorkUnit产生之后在被调度时会加上一些状态量比如<br> WorkUnitState workUnitState = new WorkUnitState(workUnit);<br> workUnitState.setId(taskId);<br> workUnitState.setProp(ConfigurationKeys.JOB_ID_KEY, jobId);<br> workUnitState.setProp(ConfigurationKeys.TASK_ID_KEY, taskId);<br> this.workUnitManager.addWorkUnit(workUnitState);<br>被调度的时候会根据WorkUnitState从getExtractor接口拿到一个Extractor句柄，来真正抽取数据。</schema,></p>
+</li>
+</ol>
+<ol>
+<li><p><strong>Extractor</strong>类需要实现的函数较多，最主要的还是readRecordImpl，不过core提供的KafkaExtractor还是抽象类，需要我们另外实现一个函数</p>
+<p> D decodeRecord(MessageAndOffset messageAndOffset);<br>即解码kafka的MessageAndOffset对象</p>
+</li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>Gobblin是Linkedin内部用来整合各种数据源（关系型数据库，kafka，FTP/SFTP servers等等）通用ETL框架，于14年开源（<a href="https://github.com/linkedin/gobblin" target="_blank" ]]>
+    </summary>
+    
+      <category term="Gobblin" scheme="http://zyq001.github.io/tags/Gobblin/"/>
+    
+      <category term="Hdfs" scheme="http://zyq001.github.io/tags/Hdfs/"/>
+    
+      <category term="Kafka" scheme="http://zyq001.github.io/tags/Kafka/"/>
+    
+      <category term="OS项目" scheme="http://zyq001.github.io/categories/OS%E9%A1%B9%E7%9B%AE/"/>
+    
+      <category term="Gobblin" scheme="http://zyq001.github.io/categories/OS%E9%A1%B9%E7%9B%AE/Gobblin/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[git常见问题备忘]]></title>
+    <link href="http://zyq001.github.io/2015/08/30/git%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E5%A4%87%E5%BF%98/"/>
+    <id>http://zyq001.github.io/2015/08/30/git常见问题备忘/</id>
+    <published>2015-08-30T07:15:46.000Z</published>
+    <updated>2015-09-03T15:39:06.682Z</updated>
+    <content type="html"><![CDATA[<h3 id="1,github_changes_not_staged_for_commit">1,github changes not staged for commit</h3><p>   Git在未进行commit操作之前，存在三种状态：Untracked files，<br>   Changes not staged for commit及Changes to be committed，每种状态之间可以随意进行互相转换。</p>
+<p>   -Changes not staged for </p>
+<p>   commit”状态，表明文件已经修改，但是还没有放入暂存区域，也就是没生成快照。<br>   如果现在进行commit操作，只是将修改之前的文件快照提交到了git目录，<br>   只有暂存区域的文件（即：文件状态为“Changes to be committed”）才会被提交。<br>   正如提示，通过“git add README.txt”命令将已修改文件更新到暂存区域中，<br>   如果想撤销修改，可以使用“git checkout – README.txt”命令。<br>   <a id="more"></a><br>   如果通过git add . 或者 git add * 或者git add 文件名都依然处于not staged状态，那么需要考虑项目中是否有submodule（子模块），<br>   如果有，需要现在submodule中 add &amp; commit，再在主项目中git add才能把最新修改提交到本地版本库。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h3 id="1,github_changes_not_staged_for_commit">1,github changes not staged for commit</h3><p>   Git在未进行commit操作之前，存在三种状态：Untracked files，<br>   Changes not staged for commit及Changes to be committed，每种状态之间可以随意进行互相转换。</p>
+<p>   -Changes not staged for </p>
+<p>   commit”状态，表明文件已经修改，但是还没有放入暂存区域，也就是没生成快照。<br>   如果现在进行commit操作，只是将修改之前的文件快照提交到了git目录，<br>   只有暂存区域的文件（即：文件状态为“Changes to be committed”）才会被提交。<br>   正如提示，通过“git add README.txt”命令将已修改文件更新到暂存区域中，<br>   如果想撤销修改，可以使用“git checkout – README.txt”命令。<br>]]>
+    
+    </summary>
+    
+      <category term="changes not staged" scheme="http://zyq001.github.io/tags/changes-not-staged/"/>
+    
+      <category term="git" scheme="http://zyq001.github.io/tags/git/"/>
+    
+      <category term="github" scheme="http://zyq001.github.io/tags/github/"/>
+    
+      <category term="问题" scheme="http://zyq001.github.io/tags/%E9%97%AE%E9%A2%98/"/>
+    
+      <category term="研发管理" scheme="http://zyq001.github.io/categories/%E7%A0%94%E5%8F%91%E7%AE%A1%E7%90%86/"/>
+    
+      <category term="git" scheme="http://zyq001.github.io/categories/%E7%A0%94%E5%8F%91%E7%AE%A1%E7%90%86/git/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[列式Parquet与行式Avro，对比Benchmarks性能分析]]></title>
-    <link href="http://zyq001.github.io/2015/09/01/%E5%88%97%E5%BC%8FApache%20Parquet%E4%B8%8E%E8%A1%8C%E5%BC%8FAvro%EF%BC%8C%E5%AF%B9%E6%AF%94Benchmarks%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90/"/>
-    <id>http://zyq001.github.io/2015/09/01/列式Apache Parquet与行式Avro，对比Benchmarks性能分析/</id>
-    <published>2015-08-31T16:40:09.000Z</published>
-    <updated>2015-09-03T16:22:39.898Z</updated>
+    <link href="http://zyq001.github.io/2015/08/20/%E5%88%97%E5%BC%8FApache%20Parquet%E4%B8%8E%E8%A1%8C%E5%BC%8FAvro%EF%BC%8C%E5%AF%B9%E6%AF%94Benchmarks%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90/"/>
+    <id>http://zyq001.github.io/2015/08/20/列式Apache Parquet与行式Avro，对比Benchmarks性能分析/</id>
+    <published>2015-08-19T16:40:09.000Z</published>
+    <updated>2015-09-04T19:14:09.971Z</updated>
     <content type="html"><![CDATA[<h2 id="关于Parquet">关于Parquet</h2><p>  Parquet是面向分析型业务的列式存储格式，由Twitter和Cloudera合作开发，2015年5月从Apache的孵化器里毕业成为Apache顶级项目，细节请参考[[这里|<a href="http://parquet.apache.org/documentation/latest/]]。" target="_blank" rel="external">http://parquet.apache.org/documentation/latest/]]。</a></p>
 <h3 id="列式存储">列式存储</h3><a id="more"></a>
 <p>  列式存储和行式存储相比有哪些优势呢？</p>
@@ -70,37 +152,6 @@
       <category term="存储格式" scheme="http://zyq001.github.io/categories/Hadoop/HDFS/%E5%AD%98%E5%82%A8%E6%A0%BC%E5%BC%8F/"/>
     
       <category term="Parquet" scheme="http://zyq001.github.io/categories/Hadoop/HDFS/%E5%AD%98%E5%82%A8%E6%A0%BC%E5%BC%8F/Parquet/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[git常见问题备忘]]></title>
-    <link href="http://zyq001.github.io/2015/08/30/git%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E5%A4%87%E5%BF%98/"/>
-    <id>http://zyq001.github.io/2015/08/30/git常见问题备忘/</id>
-    <published>2015-08-30T07:15:46.000Z</published>
-    <updated>2015-09-03T15:39:06.682Z</updated>
-    <content type="html"><![CDATA[<h3 id="1,github_changes_not_staged_for_commit">1,github changes not staged for commit</h3><p>   Git在未进行commit操作之前，存在三种状态：Untracked files，<br>   Changes not staged for commit及Changes to be committed，每种状态之间可以随意进行互相转换。</p>
-<p>   -Changes not staged for </p>
-<p>   commit”状态，表明文件已经修改，但是还没有放入暂存区域，也就是没生成快照。<br>   如果现在进行commit操作，只是将修改之前的文件快照提交到了git目录，<br>   只有暂存区域的文件（即：文件状态为“Changes to be committed”）才会被提交。<br>   正如提示，通过“git add README.txt”命令将已修改文件更新到暂存区域中，<br>   如果想撤销修改，可以使用“git checkout – README.txt”命令。<br>   <a id="more"></a><br>   如果通过git add . 或者 git add * 或者git add 文件名都依然处于not staged状态，那么需要考虑项目中是否有submodule（子模块），<br>   如果有，需要现在submodule中 add &amp; commit，再在主项目中git add才能把最新修改提交到本地版本库。</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<h3 id="1,github_changes_not_staged_for_commit">1,github changes not staged for commit</h3><p>   Git在未进行commit操作之前，存在三种状态：Untracked files，<br>   Changes not staged for commit及Changes to be committed，每种状态之间可以随意进行互相转换。</p>
-<p>   -Changes not staged for </p>
-<p>   commit”状态，表明文件已经修改，但是还没有放入暂存区域，也就是没生成快照。<br>   如果现在进行commit操作，只是将修改之前的文件快照提交到了git目录，<br>   只有暂存区域的文件（即：文件状态为“Changes to be committed”）才会被提交。<br>   正如提示，通过“git add README.txt”命令将已修改文件更新到暂存区域中，<br>   如果想撤销修改，可以使用“git checkout – README.txt”命令。<br>]]>
-    
-    </summary>
-    
-      <category term="changes not staged" scheme="http://zyq001.github.io/tags/changes-not-staged/"/>
-    
-      <category term="git" scheme="http://zyq001.github.io/tags/git/"/>
-    
-      <category term="github" scheme="http://zyq001.github.io/tags/github/"/>
-    
-      <category term="问题" scheme="http://zyq001.github.io/tags/%E9%97%AE%E9%A2%98/"/>
-    
-      <category term="研发管理" scheme="http://zyq001.github.io/categories/%E7%A0%94%E5%8F%91%E7%AE%A1%E7%90%86/"/>
-    
-      <category term="git" scheme="http://zyq001.github.io/categories/%E7%A0%94%E5%8F%91%E7%AE%A1%E7%90%86/git/"/>
     
   </entry>
   

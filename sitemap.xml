@@ -2,13 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://zyq001.github.io/2015/07/04/Java-Coding-%E5%B0%8F%E6%8A%80%E5%B7%A7/</loc>
-    <lastmod>2015-09-04T16:00:15.290Z</lastmod>
+    <loc>http://zyq001.github.io/2015/08/20/%E5%88%97%E5%BC%8FApache%20Parquet%E4%B8%8E%E8%A1%8C%E5%BC%8FAvro%EF%BC%8C%E5%AF%B9%E6%AF%94Benchmarks%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90/</loc>
+    <lastmod>2015-09-04T19:14:09.971Z</lastmod>
   </url>
   
   <url>
-    <loc>http://zyq001.github.io/2015/09/01/%E5%88%97%E5%BC%8FApache%20Parquet%E4%B8%8E%E8%A1%8C%E5%BC%8FAvro%EF%BC%8C%E5%AF%B9%E6%AF%94Benchmarks%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90/</loc>
-    <lastmod>2015-09-03T16:22:39.898Z</lastmod>
+    <loc>http://zyq001.github.io/2015/09/02/Linkedin-Gobblin%E6%9E%B6%E6%9E%84%E4%B8%8E%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-%E4%BB%8EKafa-Hdfs%E7%9A%84case-study%E5%BC%80%E5%A7%8B/</loc>
+    <lastmod>2015-09-04T19:13:43.239Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://zyq001.github.io/2015/07/04/Java-Coding-%E5%B0%8F%E6%8A%80%E5%B7%A7/</loc>
+    <lastmod>2015-09-04T16:00:15.290Z</lastmod>
   </url>
   
   <url>
@@ -64,11 +69,6 @@
   <url>
     <loc>http://zyq001.github.io/2015/03/15/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B4%A2%E5%BC%95%E5%8E%9F%E7%90%86/</loc>
     <lastmod>2015-09-02T17:08:12.382Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://zyq001.github.io/baidu_verify_TVhbw3eeGr.html</loc>
-    <lastmod>2015-09-02T14:52:58.923Z</lastmod>
   </url>
   
   <url>
