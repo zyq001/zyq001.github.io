@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://zyq001.github.io/"/>
-  <updated>2015-09-04T19:29:56.553Z</updated>
+  <updated>2015-09-05T12:11:49.409Z</updated>
   <id>http://zyq001.github.io/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://zyq001.github.io/2015/09/02/Linkedin-Gobblin%E6%9E%B6%E6%9E%84%E4%B8%8E%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0-%E4%BB%8EKafa-Hdfs%E7%9A%84case-study%E5%BC%80%E5%A7%8B/"/>
     <id>http://zyq001.github.io/2015/09/02/Linkedin-Gobblin架构与源码学习-从Kafa-Hdfs的case-study开始/</id>
     <published>2015-09-01T17:02:44.000Z</published>
-    <updated>2015-09-04T19:29:56.553Z</updated>
+    <updated>2015-09-05T12:11:49.409Z</updated>
     <content type="html"><![CDATA[<p>Gobblin是Linkedin内部用来整合各种数据源（关系型数据库，kafka，FTP/SFTP servers等等）通用ETL框架，于14年开源（<a href="https://github.com/linkedin/gobblin" target="_blank" rel="external">地址</a>）。用本人低俗的理解，画了一张很大的饼，各种数据都可以在这里“一站式”解决ETL整个过程（据说他们内部也是这么干的），专为大数据而生。</p>
 <p>在某道公司实习的时候参与到一个实时统计系统的优化，之前日志数据从Kafka到Hdfs的落地用的是<a href="https://github.com/linkedin/camus" target="_blank" rel="external">Linkedin/camus</a>,但据说作者不想写了（也有人说写到太烂了，，），现在已经停止开发，借助Hdfs上由Avro改Parquet列式存储的机会，把camus替换成了Gobblin，花了一段时间了解Gobblin。  </p>
 <p>论文的阅读理解和整体架构稍后再写吧，这次先借助官方Wiki的Kafka-Hdfs case study，从自己接触最多的部分开始介绍吧。  </p>
@@ -30,7 +30,7 @@
 <li>配置文件指定我们的Source，Writer等类，和地址等，配置文件后缀名必须是.job或者.pull  </li>
 <li>脚本启动，可以选Standalone和MR两种模式，通过参数或者环境变量指定一些工作目录详见[Wiki/Deployment]</li>
 <li>gobblin-runtime包下的JobLauncher读取配置文件，将配置文件抽象成一种SourceState结构，</li>
-<li><p>将SourceStare交给我们的KafaSource。Source类要做的跟数据源取得联系，比如初始化一些metadata元数据等，并生成WorkUnit（这个概念是为了迎合Yarn中Container的概念，并且可以指定配置一些策略如通过指定mapper数量修改对应关系，默认一个WorkUnit一个mapper，），然后把WorkUnit交给Extractor, gobblin-core包下自带的关于kafka的类见下图：<br><img src="/images/kafka.png" alt="kafka"><br>这里必须提一下KafkaWraper，这里封装了各种跟kafka打交道的api，不过截至目前都是用的old api，新api的接口函数以及有了，但是没有实现，调用会直接throw异常。</p>
+<li><p>将SourceStare交给我们的KafaSource。Source类要做的跟数据源取得联系，比如初始化一些metadata元数据等，并生成WorkUnit（这个概念是为了迎合Yarn中Container的概念，并且可以指定配置一些策略如通过指定mapper数量修改对应关系，默认一个WorkUnit一个mapper，），然后把WorkUnit交给JobManager来调度, gobblin-core包下自带的关于kafka的类见下图：<br><img src="/images/kafka.png" alt="kafka"><br>这里必须提一下KafkaWraper，这里封装了各种跟kafka打交道的api，不过截至目前都是用的old api，新api的接口函数以及有了，但是没有实现，调用会直接throw异常。</p>
 </li>
 <li><p>Extractor负责实现从数据源中读数据。</p>
 </li>
@@ -39,12 +39,19 @@
 <h2 id="接口">接口</h2><hr>
 <ol>
 <li><p><strong>Source</strong>类需要实现两个函数：  getWorkUnits,和getExtractor</p>
-<p> <code>public List&lt;WorkUnit&gt; getWorkunits(SourceState state){}</code><br>根据解析出来的配置文件生成WorkUnit，这个在KafkaSource类中实现，但是KafkaSource还是抽象类，core包自带两个实现类，KafkaAvroSource和KafkaSimpleSource类</p>
-<p> public Extractor<schema, genericrecord=""> getExtractor(WorkUnitState state) throws IOException {<br> return new KafkaAvroExtractor(state);<br>   }<br>KafkaAvroSource类就是产生一个Extractor，WorkUnit产生之后在被调度时会加上一些状态量比如<br> WorkUnitState workUnitState = new WorkUnitState(workUnit);<br> workUnitState.setId(taskId);<br> workUnitState.setProp(ConfigurationKeys.JOB_ID_KEY, jobId);<br> workUnitState.setProp(ConfigurationKeys.TASK_ID_KEY, taskId);<br> this.workUnitManager.addWorkUnit(workUnitState);<br>被调度的时候会根据WorkUnitState从getExtractor接口拿到一个Extractor句柄，来真正抽取数据。</schema,></p>
+<p> <code>public List&lt;WorkUnit&gt; getWorkunits(SourceState state){}</code><br>根据解析出来的配置文件生成WorkUnit，这个在KafkaSource类中实现，但是KafkaSource还是抽象类，core包自带两个实现类，KafkaAvroSource和KafkaSimpleSource类   </p>
+<p> public Extractor<schema, genericrecord=""> getExtractor(WorkUnitState state) throws IOException {<br> return new KafkaAvroExtractor(state);<br>   }  </schema,></p>
 </li>
 </ol>
+<p>KafkaAvroSource类就是产生一个Extractor，WorkUnit产生之后在被调度时会加上一些状态量比如  </p>
+<pre><code>WorkUnitState workUnitState = new WorkUnitState(workUnit)<span class="comment">;</span>
+workUnitState.setId(taskId)<span class="comment">;</span>
+workUnitState.setProp(ConfigurationKeys.JOB_ID_KEY, jobId)<span class="comment">;</span>
+workUnitState.setProp(ConfigurationKeys.TASK_ID_KEY, taskId)<span class="comment">;</span>
+this.workUnitManager.addWorkUnit(workUnitState)<span class="comment">;</span>
+</code></pre><p>被JobManeger调度的时候会根据WorkUnitState从getExtractor接口拿到一个Extractor句柄，来真正抽取数据。  </p>
 <ol>
-<li><p><strong>Extractor</strong>类需要实现的函数较多，最主要的还是readRecordImpl，不过core提供的KafkaExtractor还是抽象类，需要我们另外实现一个函数</p>
+<li><p><strong>Extractor</strong>类需要实现的函数较多，最主要的还是readRecordImpl，不过core提供的KafkaExtractor还是抽象类，需要我们另外实现一个函数   </p>
 <p> D decodeRecord(MessageAndOffset messageAndOffset);<br>即解码kafka的MessageAndOffset对象</p>
 </li>
 </ol>
