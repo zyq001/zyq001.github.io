@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://zyq001.github.io/"/>
-  <updated>2015-09-23T12:13:33.888Z</updated>
+  <updated>2015-09-23T12:20:33.955Z</updated>
   <id>http://zyq001.github.io/</id>
   
   <author>
@@ -15,13 +15,17 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title><![CDATA[Gobblin-框架与MR模式简介]]></title>
-    <link href="http://zyq001.github.io/2015/09/21/Gobblin-%E6%A1%86%E6%9E%B6%E4%B8%8EMR%E6%A8%A1%E5%BC%8F%E7%AE%80%E4%BB%8B/"/>
-    <id>http://zyq001.github.io/2015/09/21/Gobblin-框架与MR模式简介/</id>
-    <published>2015-09-21T07:18:15.000Z</published>
-    <updated>2015-09-23T12:13:33.888Z</updated>
-    <content type="html"><![CDATA[<p><strong>## 系统框架与组件   ##</strong><br><img src="/images/GobblinArct.png" alt="Gobblin 框架"><br>一个Gobblin的Job就是从数据源抽取数据到Sink（比如HDFS）。一个Job可由多个workunits或者tasks组成，他们代表一系列需要做的工作，如抽取抽取（Extracter），转换（Converter），写（Writer）等</p>
-<p><strong>Source</strong><br>Source负责将整个工作分成多个workunit，并且为每个workunit制定抽取器（Extractor，暂且这么翻译吧）。类似于Hadoop的InputFormat。  </p>
+    <title></title>
+    <link href="http://zyq001.github.io/2015/09/23/Gobblin-%E6%A1%86%E6%9E%B6%E4%B8%8EMR%E6%A8%A1%E5%BC%8F%E7%AE%80%E4%BB%8B/"/>
+    <id>http://zyq001.github.io/2015/09/23/Gobblin-框架与MR模式简介/</id>
+    <published>2015-09-23T12:18:12.183Z</published>
+    <updated>2015-09-23T12:20:33.955Z</updated>
+    <content type="html"><![CDATA[<p>title: Gobblin-框架与MR模式简介<br>date: 2015-09-21 15:18:15<br>tags: Hadoop, Gobblin<br>thumbnail: /images/gobblin_tb.png   </p>
+<h2 id="banner:_/images/gobblin_logo-png">banner: /images/gobblin_logo.png     </h2><p>Gobblin 是 Hadoop 通用数据摄取框架，可以从各种数据源中提取，转换和加载海量数据。比如：数据库，rest APIs，filers，等等。Gobblin 处理日常规划任务需要所有数据摄取 ETLs，包括作业/任务规划，任务分配，错误处理，状态管理，数据质量检测，数据发布等等。</p>
+<p>Gobblin 通过同样的执行框架从不同数据源摄取数据，在同一个地方管理所有不同数据源的元数据。同时结合了其他特性，比如自动伸缩，容错，数据质量保证，可扩展和处理数据模型改革等等。Gobblin 变得更容易使用，是个高效的数据摄取框架。</p>
+<p><strong>## 系统框架与组件   ##</strong></p>
+<p>一个Gobblin的Job就是从数据源抽取数据到Sink（比如HDFS）。一个Job可由多个workunits或者tasks组成，他们代表一系列需要做的工作，如抽取抽取（Extracter），转换（Converter），写（Writer）等</p>
+<p><img src="/images/GobblinArct.png" alt="Gobblin 框架"><br><a id="more"></a><br><strong>Source</strong><br>Source负责将整个工作分成多个workunit，并且为每个workunit制定抽取器（Extractor，暂且这么翻译吧）。类似于Hadoop的InputFormat。  </p>
 <p><strong>Extractor</strong><br>workunit中真正进行数据抽取。Gobblin使用一个<strong>watermark</strong>对象来告诉extractor数据的起始（low watermark）和结束位置（high watermark）。例如对于Kafka，watermarks就是一个partition的offsets。watermark不一定非得是数字numeric，只要可以被识别就行。  </p>
 <p><strong>Writer</strong><br>将通过record-level策略的记录写到临时目录（staging directory），整个task成功完成后再把所有记录移动到Writer输出目录（output directory）已接受task-level的质量检查，然后被Publisher发布出去。</p>
 <p><strong>Publisher</strong><br>将writer写好的数据<strong>发布</strong>到Job输出目录。 Gobblin提供两种发布策略，完整提交和部分提交，部分提交时，只要writer输出目录中有不完整的数据也会被发布。</p>
@@ -40,10 +44,14 @@
 <p>-fs也可制定uri，单应该跟fs.uri不冲突<br>所有的数据和状态信息都会存在这里，一定要保证HADOOP_BIN_DIR环境变量已经设置好<br>GOBBLIN_WORK_DIR或者–workdir也应该指定在uri下</p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p><strong>## 系统框架与组件   ##</strong><br><img src="/images/GobblinArct.png" alt="Gobblin 框架"><br>一个Gobblin的Job就是从数据源抽取数据到Sink（比如HDFS）。一个Job可由多]]>
-    </summary>
+    <![CDATA[<p>title: Gobblin-框架与MR模式简介<br>date: 2015-09-21 15:18:15<br>tags: Hadoop, Gobblin<br>thumbnail: /images/gobblin_tb.png   </p>
+<h2 id="banner:_/images/gobblin_logo-png">banner: /images/gobblin_logo.png     </h2><p>Gobblin 是 Hadoop 通用数据摄取框架，可以从各种数据源中提取，转换和加载海量数据。比如：数据库，rest APIs，filers，等等。Gobblin 处理日常规划任务需要所有数据摄取 ETLs，包括作业/任务规划，任务分配，错误处理，状态管理，数据质量检测，数据发布等等。</p>
+<p>Gobblin 通过同样的执行框架从不同数据源摄取数据，在同一个地方管理所有不同数据源的元数据。同时结合了其他特性，比如自动伸缩，容错，数据质量保证，可扩展和处理数据模型改革等等。Gobblin 变得更容易使用，是个高效的数据摄取框架。</p>
+<p><strong>## 系统框架与组件   ##</strong></p>
+<p>一个Gobblin的Job就是从数据源抽取数据到Sink（比如HDFS）。一个Job可由多个workunits或者tasks组成，他们代表一系列需要做的工作，如抽取抽取（Extracter），转换（Converter），写（Writer）等</p>
+<p><img src="/images/GobblinArct.png" alt="Gobblin 框架"><br>]]>
     
-      <category term="Hadoop, Gobblin" scheme="http://zyq001.github.io/tags/Hadoop-Gobblin/"/>
+    </summary>
     
   </entry>
   
@@ -971,9 +979,10 @@ public <span class="keyword">void</span> swap(<span class="built_in">int</span>[
     <link href="http://zyq001.github.io/2014/09/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-TCP-IP%E6%80%BB%E7%BB%93/"/>
     <id>http://zyq001.github.io/2014/09/08/计算机网络-TCP-IP总结/</id>
     <published>2014-09-08T02:43:47.000Z</published>
-    <updated>2015-09-08T04:31:14.830Z</updated>
+    <updated>2015-09-23T12:20:42.864Z</updated>
     <content type="html"><![CDATA[<h1 id="OSI7层与TCP/IP4层">OSI7层与TCP/IP4层</h1><p>![总结]（/images/OSI&amp;TCPIP.png）  </p>
 <h1 id="TCP协议：">TCP协议：</h1><p>一种面向连接的、可靠的、基于字节流的传输层通信协议，由IETF的RFC 793定义。<br>应用层向TCP层发送用于网间传输的、用8位字节表示的数据流，然后TCP把数据流分区成适当长度的报文段（通常受该计算机连接的网络的数据链路层的最大传输单元（[1]  MTU）的限制）。<br>之后TCP把结果包传给IP层，由它来通过网络将包传送给接收端实体[1]  的TCP层。<br>TCP为了保证不发生丢包，就给每个包一个序号，同时序号也保证了传送到接收端实体的包的按序接收。<br>然后接收端实体对已成功收到的包发回一个相应的确认（ACK）；如果发送端实体在合理的往返时延（RTT）内未收到确认，那么对应的数据包就被假设为已丢失将会被进行重传。<br>TCP用一个校验和函数来检验数据是否有错误；在发送和接收时都要计算校验和。  </p>
+<a id="more"></a>
 <h3 id="连接建立与关闭">连接建立与关闭</h3><p>![三次握手，四次挥手及状态转移]（/images/3&amp;4.png） </p>
 <ul>
 <li><p>SYN攻击<br>在三次握手过程中，服务器发送SYN-ACK之后，收到客户端的ACK之前的TCP连接称为半连接(half-open connect).此时服务器处于Syn_RECV状态.当收到ACK后，服务器转入ESTABLISHED状态.<br>Syn攻击就是 攻击客户端 在短时间内伪造大量不存在的IP地址，向服务器不断地发送syn包，服务器回复确认包，并等待客户的确认，由于源地址是不存在的，服务器需要不断的重发直 至超时，这些伪造的SYN包将长时间占用未连接队列，正常的SYN请求被丢弃，目标系统运行缓慢，严重者引起网络堵塞甚至系统瘫痪。<br>Syn攻击是一个典型的DDOS攻击。检测SYN攻击非常的方便，当你在服务器上看到大量的半连接状态时，特别是源IP地址是随机的，基本上可以断定这是一次SYN攻击.在Linux下可以如下命令检测是否被Syn攻击<br>netstat -n -p TCP | grep SYN_RECV<br>一般较新的TCP/IP协议栈都对这一过程进行修正来防范Syn攻击，修改tcp协议实现。主要方法有SynAttackProtect保护机制、SYN cookies技术、增加最大半连接和缩短超时时间等.<br>但是不能完全防范syn攻击。    </p>
@@ -1041,7 +1050,8 @@ public <span class="keyword">void</span> swap(<span class="built_in">int</span>[
 ]]></content>
     <summary type="html">
     <![CDATA[<h1 id="OSI7层与TCP/IP4层">OSI7层与TCP/IP4层</h1><p>![总结]（/images/OSI&amp;TCPIP.png）  </p>
-<h1 id="TCP协议：">TCP协议：</h1><p>一种面向连接的、可靠的、基于字节流的传输层通信协议]]>
+<h1 id="TCP协议：">TCP协议：</h1><p>一种面向连接的、可靠的、基于字节流的传输层通信协议，由IETF的RFC 793定义。<br>应用层向TCP层发送用于网间传输的、用8位字节表示的数据流，然后TCP把数据流分区成适当长度的报文段（通常受该计算机连接的网络的数据链路层的最大传输单元（[1]  MTU）的限制）。<br>之后TCP把结果包传给IP层，由它来通过网络将包传送给接收端实体[1]  的TCP层。<br>TCP为了保证不发生丢包，就给每个包一个序号，同时序号也保证了传送到接收端实体的包的按序接收。<br>然后接收端实体对已成功收到的包发回一个相应的确认（ACK）；如果发送端实体在合理的往返时延（RTT）内未收到确认，那么对应的数据包就被假设为已丢失将会被进行重传。<br>TCP用一个校验和函数来检验数据是否有错误；在发送和接收时都要计算校验和。  </p>]]>
+    
     </summary>
     
   </entry>
